@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import 'package:miasuperadmin/lib/Bindings/Screen%20Bindings/screen_bindings.dart';
-import 'package:miasuperadmin/lib/Bindings/Set%20Routes/set_routes.dart';
-import 'lib/Bindings/Routes/routes.dart';
+import 'Bindings/Routes/routes.dart';
+import 'Bindings/Screen Bindings/screen_bindings.dart';
+import 'Bindings/Set Routes/set_routes.dart';
+
 
 void main() async {
   runApp(const MyApp());
