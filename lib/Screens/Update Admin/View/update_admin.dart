@@ -10,42 +10,12 @@ import '../../../Widgets/My Button/my_button.dart';
 import '../../../Widgets/My TextForm Field/my_textform_field.dart';
 import '../Controller/update_admin_controller.dart';
 
-class UpdateAdmin extends StatefulWidget {
-  @override
-  State<UpdateAdmin> createState() => _UpdateAdminState();
-}
 
-class _UpdateAdminState extends State<UpdateAdmin> {
-  final _formKey = GlobalKey<FormState>();
+class UpdateAdmin extends GetView {
+  
   UpdateAdminController updateAdminController =
       Get.put(UpdateAdminController());
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    updateAdminController.listOfSubAdmin = updateAdminController.argument[0];
-    updateAdminController.token = updateAdminController.argument[1];
-
-    print('argument[0] ${updateAdminController.listOfSubAdmin}');
-    print('argument[1] ${updateAdminController.token}');
-
-    // updateAdminController.file = updateAdminController.listOfSubAdmin!.image;
-
-    updateAdminController.userFirstNameController.text =
-        updateAdminController.listOfSubAdmin!.firstname!;
-    updateAdminController.userLastNameController.text =
-        updateAdminController.listOfSubAdmin!.lastname!;
-    updateAdminController.userCnicController.text =
-        updateAdminController.listOfSubAdmin!.cnic!;
-    updateAdminController.userMobileNoController.text =
-        updateAdminController.listOfSubAdmin!.mobileno!;
-    updateAdminController.userAddressController.text =
-        updateAdminController.listOfSubAdmin!.address!;
-    updateAdminController.userPasswordController.text =
-        updateAdminController.listOfSubAdmin!.password!;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +33,7 @@ class _UpdateAdminState extends State<UpdateAdmin> {
               body: SingleChildScrollView(
                 child: Center(
                   child: Form(
-                    key: _formKey,
+                    key: updateAdminController.formKey,
                     child: Column(
                       children: [
                         GestureDetector(

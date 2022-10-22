@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:miasuperadmin/Bindings/Set%20Routes/set_routes.dart';
 import 'package:miasuperadmin/Constants/constants.dart';
 
 import '../Controller/view_resident_controller.dart';
@@ -71,21 +72,13 @@ class ViewUsers extends GetView {
                           DataCell(Container(
                               child: GestureDetector(
                                   onTap: () {
-                                    // print(
-                                    //     'particular user data.....${snapshot.data[index].firstname}');
-                                    // Get.offAndToNamed(updateAdmin, arguments: [
-                                    //   snapshot.data[index],
-                                    //   viewAdminDetailsController
-                                    //       .user!.bearerToken,
-                                    //   controller.arguments
-                                    // ]);
+                                    print( snapshot.data[index]);
+                                    Get.toNamed(viewUserDetails,
+                                        arguments: [
+                                          snapshot.data[index]
+                                        ]);
 
-                                    // Get.toNamed(viewAdminDetailsTile2,
-                                    //     arguments: [
-                                    //       snapshot.data[index].id,
-                                    //       viewAdminDetailsController
-                                    //           .user!.bearerToken,
-                                    //     ]);
+
                                   },
                                   child: Icon(Icons.info)))),
                         ]);

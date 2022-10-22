@@ -15,12 +15,16 @@ class ViewAdminDetailsController extends GetxController {
 
     user = arguments[0];
     societyid = arguments[1];
+    societyname = arguments[2];
+    
     futureData = ViewAdminApi(societyid, user!.bearerToken);
   }
 
   var arguments = Get.arguments;
   User? user;
   int? societyid;
+  String? societyname;
+  
   var currentSubAdminId;
   var currentToken;
   var listOfSubAdmin = <SubAdmin>[].obs;

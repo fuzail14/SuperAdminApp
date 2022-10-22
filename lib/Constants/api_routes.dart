@@ -16,6 +16,9 @@ class Api {
   static const String viewallresidents = baseUrl + "viewresidents";
   static const String view_gatekeepers = baseUrl + "viewgatekeepers";
   static const String viewallnotices = baseUrl + "viewallnotices";
+  static const String viewallevents = baseUrl + "event/events";
+  
+  
   
   
   

@@ -110,7 +110,7 @@ class ViewAdminDetailsTile2 extends GetView {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(viewServiceProvider);
+                    Get.toNamed(viewevents,arguments: argument);
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -135,7 +135,7 @@ class ViewAdminDetailsTile2 extends GetView {
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 20),
                             child: Text(
-                              "Service Providers",
+                              "Events",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -147,7 +147,7 @@ class ViewAdminDetailsTile2 extends GetView {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.toNamed(viewevents,arguments: argument);
+                    Get.toNamed(viewnoticeboard,arguments: argument);
                   },
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),

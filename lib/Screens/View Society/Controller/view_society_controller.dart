@@ -26,9 +26,13 @@ class ViewSocietyController extends GetxController {
   }) {
     if (debouncer != null) {
       debouncer!.cancel();
+      update();
+
     }
 
     debouncer = Timer(duration, callback);
+    update();
+      
   }
 @override
   void dispose() {
@@ -74,6 +78,8 @@ class ViewSocietyController extends GetxController {
         societyli.add(society);
       }
       print(societyli.length);
+      print(societyli);
+      
 
       return societyli;
 // societyli.add(society);
@@ -110,6 +116,9 @@ class ViewSocietyController extends GetxController {
         );
 
         societyli.add(society);
+        update();
+      
+
       }
       print(societyli.length);
 

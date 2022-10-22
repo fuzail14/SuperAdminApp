@@ -71,101 +71,113 @@ class ViewAdminDetails extends GetView {
                   future: controller.futureData,
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      return SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: DataTable(
-                          columnSpacing:
-                              MediaQuery.of(context).size.width * 0.05,
-                          columns: [
-                            DataColumn(label: Text('First Name')),
-                            DataColumn(label: Text('LastName')),
-                            DataColumn(label: Text('Cnic')),
-                            DataColumn(label: Text('Address')),
-                            DataColumn(label: Text('Mobileno')),
-                            DataColumn(label: Text("Actions")),
-                            DataColumn(label: Text("")),
-                            DataColumn(label: Text("Image")),
-                            DataColumn(label: Text("Details")),
-                          ],
-                          rows: List.generate(snapshot.data.length, (index) {
-                            final firstname = snapshot.data[index].firstname;
-                            final lastname = snapshot.data[index].lastname;
-                            final cnic = snapshot.data[index].cnic;
-                            final address = snapshot.data[index].address;
-                            final mobileno = snapshot.data[index].mobileno;
+                      return Column(
+                        children: [
+                          Text(
+                            "${viewAdminDetailsController.societyname} Society Sub Admin",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 40),
+                          ),
+                          SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: DataTable(
+                              columnSpacing:
+                                  MediaQuery.of(context).size.width * 0.05,
+                              columns: [
+                                DataColumn(label: Text('First Name')),
+                                DataColumn(label: Text('LastName')),
+                                DataColumn(label: Text('Cnic')),
+                                DataColumn(label: Text('Address')),
+                                DataColumn(label: Text('Mobileno')),
+                                DataColumn(label: Text("Actions")),
+                                DataColumn(label: Text("")),
+                                DataColumn(label: Text("Image")),
+                                DataColumn(label: Text("Details")),
+                              ],
+                              rows:
+                                  List.generate(snapshot.data.length, (index) {
+                                final firstname =
+                                    snapshot.data[index].firstname;
+                                final lastname = snapshot.data[index].lastname;
+                                final cnic = snapshot.data[index].cnic;
+                                final address = snapshot.data[index].address;
+                                final mobileno = snapshot.data[index].mobileno;
 
-                            return DataRow(cells: [
-                              DataCell(
-                                  Container(width: 75, child: Text(firstname))),
-                              DataCell(Container(child: Text(lastname))),
-                              DataCell(Container(child: Text(cnic))),
-                              DataCell(Container(child: Text(address))),
-                              DataCell(Container(child: Text(mobileno))),
-                              DataCell(Container(
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        AwesomeDialog(
-                                          context: context,
-                                          dialogType: DialogType.info,
-                                          animType: AnimType.BOTTOMSLIDE,
-                                          title: 'Are You Sure',
-                                          desc:
-                                              'Are You Sure You Want To Delete This.............',
-                                          btnCancelOnPress: () {},
-                                          btnOkOnPress: () {
-                                            controller.currentSubAdminId =
-                                                snapshot.data[index].id;
-                                            controller.currentToken =
-                                                viewAdminDetailsController
-                                                    .user!.bearerToken;
+                                return DataRow(cells: [
+                                  DataCell(Container(
+                                      width: 75, child: Text(firstname))),
+                                  DataCell(Container(child: Text(lastname))),
+                                  DataCell(Container(child: Text(cnic))),
+                                  DataCell(Container(child: Text(address))),
+                                  DataCell(Container(child: Text(mobileno))),
+                                  DataCell(Container(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            AwesomeDialog(
+                                              context: context,
+                                              dialogType: DialogType.info,
+                                              animType: AnimType.BOTTOMSLIDE,
+                                              title: 'Are You Sure',
+                                              desc:
+                                                  'Are You Sure You Want To Delete This.............',
+                                              btnCancelOnPress: () {},
+                                              btnOkOnPress: () {
+                                                controller.currentSubAdminId =
+                                                    snapshot.data[index].id;
+                                                controller.currentToken =
+                                                    viewAdminDetailsController
+                                                        .user!.bearerToken;
 
-                                            controller.deleteSubAdminApi(
-                                                controller.currentSubAdminId,
-                                                controller.currentToken!);
+                                                controller.deleteSubAdminApi(
+                                                    controller
+                                                        .currentSubAdminId,
+                                                    controller.currentToken!);
+                                              },
+                                            )..show();
                                           },
-                                        )..show();
-                                      },
-                                      child: Icon(Icons.delete)))),
-                              DataCell(Container(
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        print(
-                                            'particular user data.....${snapshot.data[index].firstname}');
-                                        Get.offAndToNamed(updateAdmin,
-                                            arguments: [
-                                              snapshot.data[index],
-                                              viewAdminDetailsController
-                                                  .user!.bearerToken,
-                                              controller.arguments
-                                            ]);
-                                      },
-                                      child: Icon(Icons.edit)))),
-                              DataCell(Container(
-                                  child: CircleAvatar(
-                                backgroundImage: AssetImage("images/user.jpg"),
-                              ))),
-                              DataCell(Container(
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        final firstname =
-                                            snapshot.data[index].firstname;
-                                        final lastname =
-                                            snapshot.data[index].lastname;
-                                        var subadminFullName =
-                                            firstname + lastname;
-                                        Get.toNamed(viewAdminDetailsTile2,
-                                            arguments: [
-                                              snapshot.data[index].id,
-                                              viewAdminDetailsController
-                                                  .user!.bearerToken,
-                                              subadminFullName
-                                            ]);
-                                            
-                                      },
-                                      child: Icon(Icons.info)))),
-                            ]);
-                          }),
-                        ),
+                                          child: Icon(Icons.delete)))),
+                                  DataCell(Container(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            print(
+                                                'particular user data.....${snapshot.data[index].firstname}');
+                                            Get.offAndToNamed(updateAdmin,
+                                                arguments: [
+                                                  snapshot.data[index],
+                                                  viewAdminDetailsController
+                                                      .user!.bearerToken,
+                                                  controller.arguments
+                                                ]);
+                                          },
+                                          child: Icon(Icons.edit)))),
+                                  DataCell(Container(
+                                      child: CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage("images/user.jpg"),
+                                  ))),
+                                  DataCell(Container(
+                                      child: GestureDetector(
+                                          onTap: () {
+                                            final firstname =
+                                                snapshot.data[index].firstname;
+                                            final lastname =
+                                                snapshot.data[index].lastname;
+                                            var subadminFullName =
+                                                firstname + lastname;
+                                            Get.toNamed(viewAdminDetailsTile2,
+                                                arguments: [
+                                                  snapshot.data[index].id,
+                                                  viewAdminDetailsController
+                                                      .user!.bearerToken,
+                                                  subadminFullName
+                                                ]);
+                                          },
+                                          child: Icon(Icons.info)))),
+                                ]);
+                              }),
+                            ),
+                          ),
+                        ],
                       );
                     } else if (snapshot.hasError) {
                       return Text('Error');

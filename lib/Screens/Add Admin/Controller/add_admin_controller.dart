@@ -9,12 +9,23 @@ import '../../../Constants/api_routes.dart';
 import '../../Login/Model/User.dart';
 
 class AddAdminController extends GetxController {
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    user = argument[0];
+    societyid = argument[1];
+
+    token = user!.bearerToken;
+  }
+
   var file;
   var isFile = false;
 
   var argument = Get.arguments;
   User? user;
   int? societyid;
+  final formKey = GlobalKey<FormState>();
 
   String? token;
 

@@ -3,7 +3,7 @@ const String addEvent = "/AddEvent";
 const String addSociety = "/AddSociety";
 const String arrivals = "/Arrivals";
 const String chat = "/Chat";
-const String events = "/Events";
+const String viewevents = "/ViewEvents";
 const String homeScreen = "/HomeScreen";
 const String login = "/Login";
 const String signUp = "/SignUp";
@@ -19,7 +19,7 @@ const String viewSociety = "/ViewSociety";
 const String viewUsers = "/ViewUsers";
 const String viewUserDetails = "/ViewUserDetails";
 const String viewadmindetails = "/ViewAdminDetails";
-const String viewevents = "/ViewEvents";
+const String viewnoticeboard = "/ViewNoticeBoard";
 
 
 

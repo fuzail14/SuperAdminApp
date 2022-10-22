@@ -13,6 +13,34 @@ import '../../../Constants/api_routes.dart';
 import '../../View Admin Details/Model/view_admin_details_model.dart';
 
 class UpdateAdminController extends GetxController {
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+
+    
+    listOfSubAdmin = argument[0];
+    token = argument[1];
+
+    print('argument[0] ${listOfSubAdmin}');
+    print('argument[1] ${token}');
+
+    // updateAdminController.file = updateAdminController.listOfSubAdmin!.image;
+
+    userFirstNameController.text =
+        listOfSubAdmin!.firstname!;
+    userLastNameController.text =
+        listOfSubAdmin!.lastname!;
+    userCnicController.text =
+        listOfSubAdmin!.cnic!;
+    userMobileNoController.text =
+        listOfSubAdmin!.mobileno!;
+    userAddressController.text =
+        listOfSubAdmin!.address!;
+    userPasswordController.text =
+        listOfSubAdmin!.password!;
+        
+  }
   TextEditingController userFirstNameController = TextEditingController();
   TextEditingController userLastNameController = TextEditingController();
   TextEditingController userMobileNoController = TextEditingController();
@@ -20,6 +48,8 @@ class UpdateAdminController extends GetxController {
   TextEditingController userAddressController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
   var argument = Get.arguments;
+  final formKey = GlobalKey<FormState>();
+  
 
   SubAdmin? listOfSubAdmin;
 
@@ -27,6 +57,8 @@ class UpdateAdminController extends GetxController {
 
 File? file;
   var isFile = false;
+  
+
 
   getFile() async {
     // String? base64Image;
@@ -77,7 +109,7 @@ File? file;
     request.headers.addAll(headers);
 
     if ( file!=null)
-      { request.files.add(await Http.MultipartFile.fromPath('image', file!.path));
+      { request.files.add(await Http.MultipartFile.fromPath('image', file.path));
 
       }
 

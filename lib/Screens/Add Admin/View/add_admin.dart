@@ -10,23 +10,15 @@ import '../../../Widgets/My TextForm Field/my_textform_field.dart';
 import '../../Login/Model/User.dart';
 import '../Controller/add_admin_controller.dart';
 
-class AddAdmin extends StatefulWidget {
-  const AddAdmin({Key? key}) : super(key: key);
 
-  @override
-  State<AddAdmin> createState() => _AddAdminState();
-}
 
-class _AddAdminState extends State<AddAdmin> {
+class AddAdmin extends GetView {
   final AddAdminController _addAdminController = Get.put(AddAdminController());
-  final _formKey = GlobalKey<FormState>();
+  
   
   @override
   Widget build(BuildContext context) {
-      _addAdminController. user =_addAdminController. argument[0];
-  _addAdminController.  societyid =_addAdminController. argument[1];
-
-    _addAdminController.token = _addAdminController.user!.bearerToken;
+    
 
     return Scaffold(
         appBar: AppBar(
@@ -36,7 +28,7 @@ class _AddAdminState extends State<AddAdmin> {
         body: SingleChildScrollView(
             child: Center(
           child: Form(
-            key: _formKey,
+            key:_addAdminController. formKey,
             child: GetBuilder<AddAdminController>(
               init: AddAdminController(),
               builder: (controller) {
@@ -148,7 +140,7 @@ class _AddAdminState extends State<AddAdmin> {
                     MyButton(
                         width: MediaQuery.of(context).size.width * 0.4,
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (_addAdminController.formKey.currentState!.validate()) {
 
                             if(controller.file == null){
 

@@ -34,55 +34,57 @@ class _UpdateSocietyState extends State<UpdateSociety> {
             builder: (controller) {
               return Form(
                 key: _formKey,
-                child: Column(
-                  children: [
-
-                    SizedBox(height: 10,),
-                    Text('Update Society Details',
-                      style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
-                 Image.asset('images/society.png'),
-                    MyTextFormField(
-                        controller: updateSocietyController.societyNameController,
-                        validator: emptyStringValidator,
-                        hintText: "Enter Society Name",
-                        obscureText: false,
-                        labelText: "Society Name",
-                        onFocusedBorderColor: primaryColor,
-                        onEnabledBorderColor: primaryColor),
-                    MyTextFormField(
-                        controller:
-                            updateSocietyController.societyAddressController,
-                        validator: emptyStringValidator,
-                        hintText: "Enter Society Address",
-                        obscureText: false,
-                        labelText: "Society Address",
-                        onFocusedBorderColor: primaryColor,
-                        onEnabledBorderColor: primaryColor),
-                    MyButton(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      horizontalPadding: 8,
-                      verticalPadding: 8,
-                      name: "Update",
-                      color: primaryColor,
-                      maxLines: 1,
-                      onPressed: () {
-
-                        updateSocietyController.updateSocietyApi(
-                            societyid: controller.society.societyid!,
-                            token: controller.user.bearerToken!,
-                            societyname: controller.societyNameController.text,
-                            societyaddress :controller.societyNameController.text ,
-
-                        );
-
-
-
-
-
-
-                      },
-                    )
-                  ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                
+                      SizedBox(height: 10,),
+                      Text('Update Society Details',
+                        style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                   Image.asset('images/society.png'),
+                      MyTextFormField(
+                          controller: updateSocietyController.societyNameController,
+                          validator: emptyStringValidator,
+                          hintText: "Enter Society Name",
+                          obscureText: false,
+                          labelText: "Society Name",
+                          onFocusedBorderColor: primaryColor,
+                          onEnabledBorderColor: primaryColor),
+                      MyTextFormField(
+                          controller:
+                              updateSocietyController.societyAddressController,
+                          validator: emptyStringValidator,
+                          hintText: "Enter Society Address",
+                          obscureText: false,
+                          labelText: "Society Address",
+                          onFocusedBorderColor: primaryColor,
+                          onEnabledBorderColor: primaryColor),
+                      MyButton(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        horizontalPadding: 8,
+                        verticalPadding: 8,
+                        name: "Update",
+                        color: primaryColor,
+                        maxLines: 1,
+                        onPressed: () {
+                
+                          updateSocietyController.updateSocietyApi(
+                              societyid: controller.society.societyid!,
+                              token: controller.user.bearerToken!,
+                              societyname: controller.societyNameController.text,
+                              societyaddress :controller.societyAddressController.text ,
+                
+                          );
+                
+                
+                
+                
+                
+                
+                        },
+                      )
+                    ],
+                  ),
                 ),
               );
             }

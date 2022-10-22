@@ -6,8 +6,8 @@ import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:miasuperadmin/Bindings/Set%20Routes/set_routes.dart';
 import 'package:miasuperadmin/Screens/Add%20Admin/View/add_admin.dart';
 import 'package:miasuperadmin/Screens/Add%20Society/View/add_society.dart';
-import 'package:miasuperadmin/Screens/Events/events.dart';
-import 'package:miasuperadmin/Screens/ViewNoticeBoard/View/view_event.dart';
+import 'package:miasuperadmin/Screens/Events/View/events.dart';
+import 'package:miasuperadmin/Screens/ViewNoticeBoard/View/view_notice_board.dart';
 
 import '../../Screens/Add Event/add_event.dart';
 import '../../Screens/Arrivals/arrivals.dart';
@@ -36,7 +36,7 @@ class Pages {
       GetPage(name: addSociety, page: () => AddSociety()),
       GetPage(name: arrivals, page: () => Arrivals()),
       GetPage(name: chat, page: () => Chat()),
-      GetPage(name: events, page: () => Events()),
+      GetPage(name: viewevents, page: () => ViewEvents()),
       GetPage(name: homeScreen, page: () => HomeScreen()),
       GetPage(name: login, page: () => LogIn()),
       GetPage(name: reports, page: () => Reports()),
@@ -52,7 +52,7 @@ class Pages {
       GetPage(name: viewUsers, page: () => ViewUsers()),
       GetPage(name: viewUserDetails, page: () => ViewUserDetails()),
       GetPage(name: viewAdminDetails, page: () => ViewAdminDetails()),
-      GetPage(name: viewevents, page: () => ViewEvents()),
+      GetPage(name: viewnoticeboard, page: () => ViewNotioceBoard()),
       
       
     ];

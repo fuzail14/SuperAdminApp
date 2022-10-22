@@ -8,13 +8,8 @@ import '../../Constants/constants.dart';
 import '../Login/Model/User.dart';
 
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends GetView {
 
 
   @override
@@ -120,46 +115,46 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(events);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Container(    child: Image.asset('images/view-society.png'),
-                                width:MediaQuery.of(context).size.width*0.15,
-                                height:MediaQuery.of(context).size.height*0.30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    topLeft: Radius.circular(20),
-                                  ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Get.toNamed(viewevents);
+                    //   },
+                    //   child: Padding(
+                    //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    //     child: Card(
+                    //       elevation: 10,
+                    //       shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(20)),
+                    //       child: Column(
+                    //         children: [
+                    //           Container(    child: Image.asset('images/view-society.png'),
+                    //             width:MediaQuery.of(context).size.width*0.15,
+                    //             height:MediaQuery.of(context).size.height*0.30,
+                    //             decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.only(
+                    //                 topRight: Radius.circular(20),
+                    //                 topLeft: Radius.circular(20),
+                    //               ),
 
 
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Text(
-                                  'Events',
-                                  style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                    //             ),
+                    //           ),
+                    //           Padding(
+                    //             padding: EdgeInsets.symmetric(
+                    //                 horizontal: 20, vertical: 20),
+                    //             child: Text(
+                    //               'Events',
+                    //               style: TextStyle(
+                    //                   fontSize: 20, fontWeight: FontWeight.bold),
+                    //             ),
+                    //           ),
 
 
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
 
                     GestureDetector(
                       onTap: () {

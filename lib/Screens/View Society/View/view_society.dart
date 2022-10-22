@@ -71,9 +71,12 @@ class ViewSociety extends GetView {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                     onTap: () {
+                                      print('address ${ snapshot.data[index].societyaddress}');
                                   Get.toNamed(viewAdminDetails, arguments: [
                                    controller. user,
-                                    snapshot.data[index].societyid
+                                    snapshot.data[index].societyid,
+                                    snapshot.data[index].societyname,
+                                    
                                   ]);
 
                                     },

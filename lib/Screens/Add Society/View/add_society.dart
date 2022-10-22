@@ -62,10 +62,12 @@ class AddSociety extends StatelessWidget {
 
                       if (_formKey.currentState!.validate()) {
                         _societyController.addSocietyApi(
-                          societyAddress:
-                              _societyController.societyAddressController.text,
+                          
                           societyName:
                               _societyController.societyNameController.text,
+                              societyAddress:
+                              _societyController.societyAddressController.text,
+                              
                           token: user.bearerToken!,
                           id: user.id!,
                         );
