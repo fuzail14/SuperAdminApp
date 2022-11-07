@@ -52,8 +52,8 @@ class ViewGateKeepers extends GetView {
                         DataColumn(label: Text('Cnic')),
                         DataColumn(label: Text('Address')),
                         DataColumn(label: Text('Mobileno')),
+                        DataColumn(label: Text("Gate No")),
                         DataColumn(label: Text("Image")),
-                        DataColumn(label: Text("Details")),
                       ],
                       rows: List.generate(snapshot.data.length, (index) {
                         
@@ -65,6 +65,8 @@ class ViewGateKeepers extends GetView {
                         String cnic = snapshot.data[index].cnic;
                         String address = snapshot.data[index].address;
                         String mobileno = snapshot.data[index].mobileno;
+                        String gateno = snapshot.data[index].gateno;
+                        
                         
 
                         return DataRow(cells: [
@@ -74,30 +76,13 @@ class ViewGateKeepers extends GetView {
                           DataCell(Container(child: Text(cnic))),
                           DataCell(Container(child: Text(address))),
                           DataCell(Container(child: Text(mobileno))),
+                             DataCell(Container(child: Text(gateno))
+                                  ),
                           DataCell(Container(
                               child: CircleAvatar(
                             backgroundImage: AssetImage('images/residents.png'),
                           ))),
-                          DataCell(Container(
-                              child: GestureDetector(
-                                  onTap: () {
-                                    // print(
-                                    //     'particular user data.....${snapshot.data[index].firstname}');
-                                    // Get.offAndToNamed(updateAdmin, arguments: [
-                                    //   snapshot.data[index],
-                                    //   viewAdminDetailsController
-                                    //       .user!.bearerToken,
-                                    //   controller.arguments
-                                    // ]);
-
-                                    // Get.toNamed(viewAdminDetailsTile2,
-                                    //     arguments: [
-                                    //       snapshot.data[index].id,
-                                    //       viewAdminDetailsController
-                                    //           .user!.bearerToken,
-                                    //     ]);
-                                  },
-                                  child: Icon(Icons.info)))),
+                       
                         ]);
                       }),
                     ),

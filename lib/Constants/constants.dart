@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-final Color primaryColor = HexColor("#00BFA6");
+final Color primaryColor = HexColor("#FB7712");
+final Color secondaryColor = HexColor("#000000");
+
 const String assetsBaseUrl = "images/";
 const String logo = '${assetsBaseUrl}logo.png';
 

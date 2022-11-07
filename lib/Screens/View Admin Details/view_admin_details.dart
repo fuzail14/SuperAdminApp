@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:miasuperadmin/Constants/api_routes.dart';
 import 'package:miasuperadmin/Screens/View%20Admin%20Details/view_admin_details_tile2.dart';
 
 import '../../Bindings/Set Routes/set_routes.dart';
@@ -102,6 +103,8 @@ class ViewAdminDetails extends GetView {
                                 final cnic = snapshot.data[index].cnic;
                                 final address = snapshot.data[index].address;
                                 final mobileno = snapshot.data[index].mobileno;
+                                
+                                
 
                                 return DataRow(cells: [
                                   DataCell(Container(
@@ -153,7 +156,7 @@ class ViewAdminDetails extends GetView {
                                   DataCell(Container(
                                       child: CircleAvatar(
                                     backgroundImage:
-                                        AssetImage("images/user.jpg"),
+                                        NetworkImage(imageBaseUrl + snapshot.data[index].image ),
                                   ))),
                                   DataCell(Container(
                                       child: GestureDetector(

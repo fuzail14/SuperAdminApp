@@ -7,16 +7,20 @@ class User {
   final String? mobileno;
   final int? roleId;
   final String? roleName;
+  final String? password;
   final String? bearerToken;
   final String? image;
 
-  User({this.mobileno,this.address,
+  User(
+      {this.mobileno,
+      this.address,
       this.id,
       this.firstName,
       this.lastName,
       this.cnic,
       this.roleId,
       this.roleName,
-        this.image,
+      this.password,
+      this.image,
       this.bearerToken});
 }

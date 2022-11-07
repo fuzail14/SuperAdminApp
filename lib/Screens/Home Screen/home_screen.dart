@@ -2,212 +2,102 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:miasuperadmin/Constants/colors.dart';
 import 'package:miasuperadmin/Screens/Home%20Screen/Controller/home_controller.dart';
+import 'package:miasuperadmin/Widgets/CardHomeScreen/card_home_screen.dart';
 import '../../Bindings/Set Routes/set_routes.dart';
 import '../../Constants/constants.dart';
 import '../Login/Model/User.dart';
 
-
-
 class HomeScreen extends GetView {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          
           automaticallyImplyLeading: false,
-          backgroundColor: primaryColor,
-          title:  Text('Home'),
+          backgroundColor: secondaryColor,
+          foregroundColor: primaryColor,
+          title: Center(
+              child: Text('Home',
+                  style: GoogleFonts.montserrat(
+                      color: primaryColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 36))),
         ),
-        body:
-
-        GetBuilder<HomeController>(
-          init: HomeController(),
-          builder: (controller) {
-            return Column(crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-              Text(
-                "Super Admin",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-              ),
-              SingleChildScrollView(scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(addSociety, arguments: controller.user);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Container(
-                                child: Image.asset('images/add-society.png'),
-                                width:MediaQuery.of(context).size.width*0.15,
-                                height:MediaQuery.of(context).size.height*0.30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                    ),
-
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Text(
-                                  'Add Society',
-                                  style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+        body: GetBuilder<HomeController>(
+            init: HomeController(),
+            builder: (controller) {
+              return SingleChildScrollView(
+                child: Stack(children: [
+                     Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.625,
+                        top: MediaQuery.of(context).size.height * 0.127),
+                    child: Image.asset(
+                      ('images/home3.png'),
+                      height: MediaQuery.of(context).size.height * 0.600,
+                      width: MediaQuery.of(context).size.width * 0.300,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.104,
+                        top: MediaQuery.of(context).size.height * 0.015),
+                    child: Text(
+                      "Super Admin",
+                      style: GoogleFonts.montserrat(
+                        color: primaryColor,
+                        //fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.normal,
+                        fontSize: MediaQuery.of(context).size.width*0.040,
+                        
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-
-
-                        Get.toNamed(viewSociety, arguments:controller. user);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Container(
-                                  child: Image.asset('images/view-society.png'),
-                                width:MediaQuery.of(context).size.width*0.15,
-                                height:MediaQuery.of(context).size.height*0.30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                    ),
-
-
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Text(
-                                  'View Society',
-                                  style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                  ),
+                  Row(
+                    
+                    children: [
+                      CardHomeScreen(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.104,
+                            top: MediaQuery.of(context).size.width * 0.070
+                            ),
+                        onTap: () {
+                          Get.toNamed(addSociety, arguments: controller.user);
+                        },
+                        text: 'Add Society',
+                        imgpath: 'images/home1.png',
                       ),
-                    ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Get.toNamed(viewevents);
-                    //   },
-                    //   child: Padding(
-                    //     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    //     child: Card(
-                    //       elevation: 10,
-                    //       shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(20)),
-                    //       child: Column(
-                    //         children: [
-                    //           Container(    child: Image.asset('images/view-society.png'),
-                    //             width:MediaQuery.of(context).size.width*0.15,
-                    //             height:MediaQuery.of(context).size.height*0.30,
-                    //             decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.only(
-                    //                 topRight: Radius.circular(20),
-                    //                 topLeft: Radius.circular(20),
-                    //               ),
-
-
-                    //             ),
-                    //           ),
-                    //           Padding(
-                    //             padding: EdgeInsets.symmetric(
-                    //                 horizontal: 20, vertical: 20),
-                    //             child: Text(
-                    //               'Events',
-                    //               style: TextStyle(
-                    //                   fontSize: 20, fontWeight: FontWeight.bold),
-                    //             ),
-                    //           ),
-
-
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(login);
-                      },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        child: Card(
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Column(
-                            children: [
-                              Container(    child: Image.asset('images/logout.png'),
-                                width:MediaQuery.of(context).size.width*0.15,
-                                height:MediaQuery.of(context).size.height*0.30,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      topLeft: Radius.circular(20),
-                                    ),
-
-
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Text(
-                                  'Logout',
-                                  style: TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-
-
-                            ],
-                          ),
-                        ),
+                      CardHomeScreen(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.020,
+                            top: MediaQuery.of(context).size.width * 0.070),
+                        onTap: () {
+                          Get.toNamed(viewSociety, arguments: controller.user);
+                        },
+                        text: 'View Society',
+                        imgpath: 'images/home2.png',
                       ),
-                    ),
-
-
-                  ],
-                ),
-              ),
-
-
-
-            ]);
-          }
-        ));
-
-
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.020,
+                  ),
+                  CardHomeScreen(
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.104,
+                        top: MediaQuery.of(context).size.height * 0.530),
+                    onTap: () {
+                      Get.toNamed(login);
+                    },
+                    text: 'Logout',
+                    imgpath: 'images/home4.png',
+                  ),
+               
+                ]),
+              );
+            }));
   }
 }
