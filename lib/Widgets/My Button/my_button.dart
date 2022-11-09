@@ -27,7 +27,7 @@ class _MyButtonState extends State<MyButton> {
         height:widget.height,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               primary: widget.color
           ),
           child:  Text(widget.name,maxLines: widget.maxLines,style: TextStyle(color: widget.textColor),),

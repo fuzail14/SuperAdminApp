@@ -1,8 +1,8 @@
 const String imageBaseUrl =
-    'http://192.168.100.150:8080/mia-society-app-laravel-api/public/storage/';
+    'http://127.0.0.1:8080/mia-society-app-laravel-api/public/storage/';
 
 class Api {
-  static const String baseUrl = 'http://192.168.100.150:8080/api/';
+  static const String baseUrl = 'http://127.0.0.1:8080/api/';
   static const String login = baseUrl + "login";
   static const String signup = baseUrl + "register";
   static const String add_society = baseUrl + "society/addsociety";

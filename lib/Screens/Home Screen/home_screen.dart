@@ -24,7 +24,9 @@ class HomeScreen extends GetView {
                   style: GoogleFonts.montserrat(
                       color: primaryColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: 36))),
+                      fontSize: 36),
+                      ),
+                      ),
         ),
         body: GetBuilder<HomeController>(
             init: HomeController(),
@@ -56,6 +58,7 @@ class HomeScreen extends GetView {
                       ),
                     ),
                   ),
+                 
                   Row(
                     
                     children: [
