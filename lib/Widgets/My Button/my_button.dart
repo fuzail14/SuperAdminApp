@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../Constants/constants.dart';
 class MyButton extends StatefulWidget {
-  final double horizontalPadding ;
-  final double verticalPadding ;
+  final OutlinedBorder? outlinedBorder ;
+
   final double? height;
   final double? width;
+  final double? elevation;
+  final double? fontSize;
+  final double? letterSpacing;
+  final FontWeight? fontWeight;
   final double? border;
   final String name;
   final Color color;
   final Color? textColor;
-  final int maxLines;
+  final int? maxLines;
   final void Function()? onPressed;
 
-  const MyButton({super.key,required this.horizontalPadding,required this.verticalPadding,this.textColor, this.height,this.width, this.border,required this.name, required this.color, required this.maxLines, this.onPressed});
+  const MyButton({super.key,this.outlinedBorder,this.elevation,this.fontWeight,this.letterSpacing,this.fontSize,
+  this.textColor, this.height,this.width, this.border,required this.name, required this.color,  this.maxLines, this.onPressed});
 
 
   @override
@@ -21,18 +29,26 @@ class MyButton extends StatefulWidget {
 class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
-    return   Padding(padding: EdgeInsets.symmetric(horizontal: widget.horizontalPadding, vertical: widget.verticalPadding),
-      child: Container(
-        width: widget.width,
-        height:widget.height,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              primary: widget.color
-          ),
-          child:  Text(widget.name,maxLines: widget.maxLines,style: TextStyle(color: widget.textColor),),
-          onPressed: widget.onPressed,
+    return   SizedBox(
+      width: widget.width,
+      height: widget.height,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+
+          elevation: widget.elevation,
+            shape: widget.outlinedBorder,
+            backgroundColor: widget.color
         ),
+        child:  Text(widget.name,
+          maxLines: widget.maxLines,
+          style:
+        GoogleFonts.montserrat(
+            color: widget.textColor,
+            fontWeight: widget.fontWeight,
+          letterSpacing: widget.letterSpacing,
+            fontSize: widget.fontSize
+        ),),
+        onPressed: widget.onPressed,
       ),
     )
     ;

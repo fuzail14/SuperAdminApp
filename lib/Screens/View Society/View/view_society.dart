@@ -201,8 +201,7 @@ class ViewSociety extends GetView {
                                                                 .size
                                                                 .height *
                                                             0.036 ,
-                                                    horizontalPadding: 0,
-                                                    verticalPadding: 0,
+
                                                     name: "Update",
                                                     color: HexColor('#2BE09F'),
                                                     maxLines: 1,

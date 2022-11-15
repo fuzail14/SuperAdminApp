@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import '../../../Constants/api_routes.dart';
 import '../../Login/Model/User.dart';
@@ -32,7 +31,6 @@ class ViewAdminDetailsController extends GetxController {
   late Future futureData;
 
   ViewAdminApi(societid, bearerToken) async {
-    
 
     final response = await Http.get(
       Uri.parse(Api.viewsubadmin + "/" + societyid.toString()),
@@ -45,7 +43,10 @@ class ViewAdminDetailsController extends GetxController {
     var data = jsonDecode(response.body.toString());
 
     var mydata = data['data'];
-    
+    print(mydata);
+
+    print(mydata[0]['firstname']);
+    print(mydata[0]['password']);
 
     if (response.statusCode == 200) {
       print('response 200');
@@ -59,13 +60,14 @@ class ViewAdminDetailsController extends GetxController {
           image: e['image'],
           lastname: e['lastname'],
           mobileno: e['mobileno'],
-          password: e['password'] ?? "",
+          password: e['password'],
           roleid: e['roleid'],
           rolename: e['rolename'],
           societyid: e['societyid'],
           subadminid: e['subadminid'],
           superadminid: e['superadminid'],
         );
+
         listOfSubAdmin.add(viewSubAdminModel!);
         
         update();
@@ -88,13 +90,13 @@ class ViewAdminDetailsController extends GetxController {
       },
     );
     var data = jsonDecode(response.body.toString());
-    var mydata = data['data'];
 
     
-    
     if (response.statusCode == 200) {
-      listOfSubAdmin.removeWhere((item) => item.societyid == societyid);
+
+      listOfSubAdmin.clear();
       futureData = ViewAdminApi(societyid, user!.bearerToken);
+      Get.back();
 
       update();
     } else {}

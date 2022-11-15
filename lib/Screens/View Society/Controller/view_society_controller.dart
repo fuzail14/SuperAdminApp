@@ -79,6 +79,7 @@ class ViewSocietyController extends GetxController {
       }
       print(societyli.length);
       print(societyli);
+      update();
       
 
       return societyli;
@@ -163,8 +164,7 @@ class ViewSocietyController extends GetxController {
 
 
                     },
-                    horizontalPadding: 0,
-                    verticalPadding: 0,
+
                     name: 'Delete',
                     color: primaryColor,
                     maxLines: 1),
@@ -172,8 +172,7 @@ class ViewSocietyController extends GetxController {
                   onPressed: () {
                  Get.back();
                   },
-                  horizontalPadding: 0,
-                  verticalPadding: 0,
+
                   name: 'Cancel',
                   color: Colors.white60,
                   maxLines: 1,

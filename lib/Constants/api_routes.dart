@@ -1,6 +1,4 @@
-const String imageBaseUrl =
-    'http://127.0.0.1:8080/mia-society-app-laravel-api/public/storage/';
-
+const String imageBaseUrl='http://127.0.0.1:8080/mia-society-app-laravel-api/public/storage/';
 class Api {
   static const String baseUrl = 'http://127.0.0.1:8080/api/';
   static const String login = baseUrl + "login";
@@ -13,11 +11,20 @@ class Api {
   static const String search_society = baseUrl + "society/searchsociety";
   static const String viewsubadmin = baseUrl + "viewsubadmin";
   static const String registersubadmin = baseUrl + "registersubadmin";
-
   static const String deletesubadmin = baseUrl + "deletesubadmin";
   static const String updatesubadmin = baseUrl + "updatesubadmin";
   static const String viewallresidents = baseUrl + "viewresidents";
   static const String view_gatekeepers = baseUrl + "viewgatekeepers";
   static const String viewallnotices = baseUrl + "viewallnotices";
   static const String viewallevents = baseUrl + "event/events";
+  static const String fcmtokenrefresh = baseUrl + "fcmtokenrefresh";
+
+
+
+
+
+
+
+
+
 }

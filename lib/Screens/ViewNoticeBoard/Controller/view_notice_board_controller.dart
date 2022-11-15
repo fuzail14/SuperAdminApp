@@ -1,12 +1,8 @@
 import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:miasuperadmin/Screens/View%20GateKeepers/Model/gate_keeper_model.dart';
-
 import '../../../Constants/api_routes.dart';
 import 'package:http/http.dart' as Http;
-
 import '../Model/noticeboard.dart';
 
 class ViewNotioceBoardController extends GetxController {
@@ -22,10 +18,10 @@ class ViewNotioceBoardController extends GetxController {
     print('on init');
     subadminid = argument[0];
     bearerToken = argument[1];
-    viewEvents(subadminid, bearerToken);
+    ViewNoticesApi(subadminid, bearerToken);
   }
 
-  viewEvents(int subadminiid, String token) async {
+  ViewNoticesApi(int subadminiid, String token) async {
     final response = await Http.get(
       Uri.parse(Api.viewallnotices + "/" + subadminiid.toString()),
       // "?page=" +

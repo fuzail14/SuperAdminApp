@@ -1,9 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../Constants/constants.dart';
 
 class MyTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
+  final FontWeight? fontWeight;
+final double? width;
+final double? height;
+final double? fontSize;
   final String? labelText;
   final Color? labelTextColor;
   final Color? hintTextColor;
@@ -15,7 +22,11 @@ class MyTextFormField extends StatefulWidget {
   final void Function()? onTap;
   const MyTextFormField(
       {super.key,
+this.fontWeight,
+      this.fontSize,
       this.onTap,
+      this.width,
+      this.height,
       this.controller,
       this.fillColor,
       this.validator,
@@ -34,41 +45,38 @@ class MyTextFormField extends StatefulWidget {
 class _MyTextFormFieldState extends State<MyTextFormField> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-          decoration: const BoxDecoration(),
-          child: TextFormField(
-            onTap: widget.onTap,
-            validator: widget.validator,
-            obscureText: widget.obscureText,
-            maxLines: 1,
-            controller: widget.controller,
-            decoration: InputDecoration(
-              labelStyle: TextStyle(
-                color: widget.labelTextColor,
-              ),
-              hintStyle: TextStyle(
-                color: widget.hintTextColor,
-              ),
-              hintText: widget.hintText,
-              labelText: widget.labelText,
-              fillColor: widget.fillColor,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide:
-                    BorderSide(color: widget.onFocusedBorderColor, width: 1),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: widget.onEnabledBorderColor,
-                  width: 1,
-                ),
-              ),
-            ),
+    return SizedBox(width:widget.width ,height:widget.height ,
+      child: TextFormField(
+        onTap: widget.onTap,
+        validator: widget.validator,
+        obscureText: widget.obscureText,
+        // maxLines: 1,
+        controller: widget.controller,
+        decoration: InputDecoration(
+          labelStyle:     GoogleFonts.montserrat(
+              color: secondaryColor,
+               fontWeight: FontWeight.w500
           ),
-        ));
+          hintStyle: TextStyle(
+            color: widget.hintTextColor,
+          ),
+          hintText: widget.hintText,
+          labelText: widget.labelText,
+          fillColor: widget.fillColor,
+          // focusedBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   borderSide:
+          //       BorderSide(color: widget.onFocusedBorderColor, width: 1),
+          // ),
+          // enabledBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   borderSide: BorderSide(
+          //     color: widget.onEnabledBorderColor,
+          //     width: 1,
+          //   ),
+          // ),
+        ),
+      ),
+    );
   }
 }

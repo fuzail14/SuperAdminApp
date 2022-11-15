@@ -1,21 +1,15 @@
-
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../../Constants/constants.dart';
-import '../../../Widgets/My Button/my_button.dart';
 import '../Controller/view_events_controller.dart';
-import 'events_images.dart';
-
-
 
 class ViewEvents extends GetView {
-
-    ViewEventsController viewResidentsController =
+  ViewEventsController viewResidentsController =
       Get.put(ViewEventsController());
 
   @override
@@ -24,7 +18,8 @@ class ViewEvents extends GetView {
       init: ViewEventsController(),
       builder: (controller) => Scaffold(
           appBar: AppBar(
-            backgroundColor: primaryColor,
+            backgroundColor: secondaryColor,
+            foregroundColor: primaryColor,
             leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
@@ -32,11 +27,8 @@ class ViewEvents extends GetView {
                 child: const Padding(
                     padding: EdgeInsets.all(8),
                     child: Icon(Icons.arrow_back_outlined))),
-            title: AutoSizeText(
+            title: Text(
               'Events',
-              minFontSize: 10,
-              stepGranularity: 10,
-              maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -44,54 +36,127 @@ class ViewEvents extends GetView {
               future: controller.viewEvents(
                   controller.subadminid, controller.bearerToken),
               builder: (context, AsyncSnapshot snapshot) {
-                
-
                 if (snapshot.hasData) {
-                  
-                  return SingleChildScrollView(
-                    child: DataTable(
-                      columnSpacing: MediaQuery.of(context).size.width * 0.05,
-                      columns: [
-                        DataColumn(label: Text('Title')),
-                        DataColumn(label: Text('description')),
-                        DataColumn(label: Text('Start Date')),
-                        DataColumn(label: Text('End Date')),
-                        // DataColumn(label: Text('Start Time')),
-                        // DataColumn(label: Text("End Time")),
-
-                        
-                       // DataColumn(label: Text("Status")),
-                      ],
-                      rows: List.generate(snapshot.data.length, (index) {
-                        
-
-
-
-                   
-                        
-                        String title = snapshot.data[index].title.toString();
-                        String description = snapshot.data[index].description.toString();
-                        String startdate = snapshot.data[index].startdate.toString();
-                        String enddate = snapshot.data[index].enddate.toString();
-                        
-                        //String status = snapshot.data[index].status.toString();
-                        
-                        
-
-                        return DataRow(cells: [
-                          DataCell(
-                              Container(width: 75, child: Text(title))),
-                          DataCell(Container(child: Text(description))),
-                          DataCell(Container(child: Text(startdate))),
-                          DataCell(Container(child: Text(enddate))),
-                          
-                          
-                       //DataCell(Container(child: Text(status))),
-                       
-                          
-                        ]);
-                      }),
-                    ),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.07,
+                            MediaQuery.of(context).size.width * 0.05,
+                            0,
+                            0),
+                        child: Text('Events',
+                            style: GoogleFonts.montserrat(
+                                color: primaryColor,
+                                fontSize:
+                                    MediaQuery.of(context).size.width * 0.023,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    child: Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 0, 0, 0),
+                                          child: Text(
+                                            snapshot.data[index].title,
+                                            style: GoogleFonts.montserrat(
+                                                color: HexColor('#000000'),
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 22, 0, 0),
+                                          child: Text(
+                                            snapshot.data[index].description,
+                                            style: GoogleFonts.montserrat(
+                                                color: HexColor('#000000'),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              1350, 20, 0, 0),
+                                          child: Container(
+                                            width: 100,
+                                            height: 20,
+                                            child: Center(
+                                                child: Text(
+                                              'Show',
+                                              style: GoogleFonts.montserrat(
+                                                  color: HexColor('#FFFFFF'),
+                                                  fontWeight: FontWeight.w500),
+                                            )),
+                                            decoration: BoxDecoration(
+                                                color: HexColor('#A52015'),
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(20, 45, 0, 0),
+                                          child: SvgPicture.asset(
+                                            'images/event_icon.svg',
+                                            color: secondaryColor,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              50, 45, 0, 0),
+                                          child: Text(
+                                            'Start Date   ${snapshot.data[index].startdate}',
+                                            style: GoogleFonts.montserrat(
+                                                color: HexColor('#A52015'),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(20, 75, 0, 0),
+                                          child: SvgPicture.asset(
+                                            'images/event_icon.svg',
+                                            color: secondaryColor,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              50, 75, 0, 0),
+                                          child: Text(
+                                            'End Date    ${snapshot.data[index].enddate}',
+                                            style: GoogleFonts.montserrat(
+                                                color: HexColor('#A52015'),
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                        color: HexColor('#EDEDED'),
+                                        borderRadius: BorderRadius.circular(8)),
+                                    width: 1500,
+                                    height: 100,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   );
                 } else if (snapshot.hasError) {
                   return Text('Error');
@@ -101,5 +166,123 @@ class ViewEvents extends GetView {
               })),
     );
   }
+}
 
-  }
+// Padding(
+// padding: EdgeInsets.fromLTRB(
+// MediaQuery.of(context).size.width * 0.07,
+// MediaQuery.of(context).size.width * 0.05,
+// 0,
+// 0),
+// child: Text('Sub Admin',
+// style: GoogleFonts.montserrat(
+// color: primaryColor,
+// fontSize:
+// MediaQuery.of(context).size.width *
+// 0.023,
+// fontWeight: FontWeight.w600)),
+// ),
+//
+// Padding(
+// padding: EdgeInsets.fromLTRB(
+// MediaQuery.of(context).size.width * 0.07,
+// MediaQuery.of(context).size.width * 0.05,
+// 0,
+// 0),                        child: Container(
+// child:Stack(children: [
+// Padding(  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+//
+// child: Text('Basant Festival',
+// style:
+// GoogleFonts
+//     .montserrat(
+// color: HexColor(
+// '#000000'),
+// fontWeight:
+// FontWeight
+//     .w500),),
+// ),
+// Padding(
+// padding: const EdgeInsets.fromLTRB(20, 22, 0, 0),
+// child: Text('The Event is held between ',
+// style:
+// GoogleFonts
+//     .montserrat(
+// color: HexColor(
+// '#000000'),
+// fontWeight:
+// FontWeight
+//     .w400),),
+// ),
+// Padding(
+// padding: const EdgeInsets.fromLTRB(1200, 20, 0, 0),
+// child: Container(
+// width: 100,height: 20,
+// child: Center(child: Text('Show',
+// style:
+// GoogleFonts
+//     .montserrat(
+// color: HexColor(
+// '#FFFFFF'),
+// fontWeight:
+// FontWeight
+//     .w500),
+//
+//
+// )),
+//
+//
+// decoration: BoxDecoration(color: HexColor('#A52015'),
+// borderRadius: BorderRadius.circular(10)
+//
+//
+// ),),
+// ), Padding(
+// padding:  EdgeInsets.fromLTRB(20, 45, 0, 0),
+// child:   SvgPicture.asset(
+//
+// 'images/event_icon.svg',
+// color: secondaryColor,
+// ),
+//
+// ),
+// Padding(
+// padding: const EdgeInsets.fromLTRB(50, 45, 0, 0),
+// child: Text('Start Date',    style:
+// GoogleFonts
+//     .montserrat(
+// color: HexColor(
+// '#000000'),
+// fontWeight:
+// FontWeight
+//     .w400),),
+// )
+// ,
+// Padding(
+// padding:  EdgeInsets.fromLTRB(20, 75, 0, 0),
+// child:   SvgPicture.asset(
+// 'images/event_icon.svg',
+// color: secondaryColor,
+// ),
+//
+// ),
+// Padding(
+// padding: const EdgeInsets.fromLTRB(50, 75, 0, 0),
+// child: Text('End Date',    style:
+// GoogleFonts
+//     .montserrat(
+// color: HexColor(
+// '#000000'),
+// fontWeight:
+// FontWeight
+//     .w400),),
+// )
+// ],) ,
+// decoration: BoxDecoration(color: HexColor('#EDEDED')
+// ,borderRadius: BorderRadius.circular(8)
+//
+// ),
+//
+// width: 1400,height: 100,),
+// ),
+//

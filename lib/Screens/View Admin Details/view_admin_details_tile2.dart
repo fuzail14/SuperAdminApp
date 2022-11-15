@@ -2,11 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:miasuperadmin/Widgets/CardHomeScreen/card_home_screen.dart';
 import '../../Bindings/Set Routes/set_routes.dart';
 import '../../Constants/constants.dart';
-import '../Add Event/add_event.dart';
 
 class ViewAdminDetailsTile2 extends GetView {
   var argument = Get.arguments;
@@ -17,9 +14,7 @@ class ViewAdminDetailsTile2 extends GetView {
     SubAdminName = argument[2];
     return Scaffold(
         appBar: AppBar(
-            backgroundColor: secondaryColor,
-          foregroundColor: primaryColor,
-            
+            backgroundColor: primaryColor,
             leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
@@ -27,101 +22,167 @@ class ViewAdminDetailsTile2 extends GetView {
                 child: const Padding(
                     padding: EdgeInsets.all(8),
                     child: Icon(Icons.arrow_back_outlined))),
-            title: Text(
-              "Sub Admin",
-               
-              style: GoogleFonts.montserrat(
-                color: primaryColor,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal,
-                fontSize: MediaQuery.of(context).size.width * 0.036,
-                
-              ),
-            )),
-        body: Stack(children: [
-          Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.625,
-                top: MediaQuery.of(context).size.height * 0.127),
-            child: Image.asset(
-              ('images/home3.png'),
-              height: MediaQuery.of(context).size.height * 0.600,
-              width: MediaQuery.of(context).size.width * 0.300,
-            ),
+            title: Text("")),
+        body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Text(
+            "Sub Admin ${SubAdminName} Society",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
           ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.104,
-                top: MediaQuery.of(context).size.height * 0.015),
-            child: Text(
-              "Sub Admin Society",
-              style: GoogleFonts.montserrat(
-                color: primaryColor,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal,
-                fontSize: MediaQuery.of(context).size.width * 0.040,
-                
-              ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(viewUsers, arguments: argument);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset('images/residents.png'),
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Text(
+                              "Residents",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(viewGateKeepers,arguments: argument);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset('images/gatekeeper.png'),
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Text(
+                              "GateKeepers",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(viewevents,arguments: argument);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset('images/events.png'),
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Text(
+                              "Events",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(viewnoticeboard,arguments: argument);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: Card(
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset('images/noticeboard.png'),
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            height: MediaQuery.of(context).size.height * 0.30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                topLeft: Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Text(
+                              'Notice Board',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                
-                children: [
-                  CardHomeScreen(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.104,
-                        top: MediaQuery.of(context).size.width * 0.070),
-                    onTap: () {
-                      Get.toNamed(viewUsers, arguments: argument);
-                    },
-                    text: "Residents",
-                    imgpath: 'images/residents.png',
-                  ),
-                  CardHomeScreen(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.030,
-                        top: MediaQuery.of(context).size.width * 0.070),
-                    imgpath: 'images/gatekeeper.png',
-                    onTap: () {
-                      Get.toNamed(viewGateKeepers, arguments: argument);
-                    },
-                    text: "GateKeepers",
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  CardHomeScreen(
-                    padding:EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.104,
-                top: MediaQuery.of(context).size.height * 0.015
-                
-                ),
-                    imgpath: 'images/events.png',
-                    onTap: () {
-                      Get.toNamed(viewevents, arguments: argument);
-                    },
-                    text: "Events",
-                  ),
-                  CardHomeScreen(
-                    padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.030,
-                
-                top: MediaQuery.of(context).size.height * 0.015
-                
-                ),
-                    onTap: () {
-                      Get.toNamed(viewnoticeboard, arguments: argument);
-                    },
-                    imgpath: 'images/noticeboard.png',
-                    text: 'Notice Board',
-                  )
-                ],
-              )
-            ],
           ),
         ]));
   }

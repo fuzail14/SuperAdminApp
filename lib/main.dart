@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
@@ -10,7 +9,6 @@ import 'Bindings/Screen Bindings/screen_bindings.dart';
 import 'Bindings/Set Routes/set_routes.dart';
 import 'Screens/Login/Model/User.dart';
 import 'Services/Shared Preferences/MySharedPreferences.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,20 +41,16 @@ class _MyAppState extends State<MyApp> {
 
     getUserSharedPreferencesData();
   }
-  void getUserSharedPreferencesData() async
-  {
-    User user= await MySharedPreferences.getUserData();
+
+  void getUserSharedPreferencesData() async {
+    User user = await MySharedPreferences.getUserData();
     print(user.bearerToken);
-    if( user.bearerToken=="")
-    {
-      Timer(Duration(seconds: 3), ()=>  Get.offAndToNamed(login)    );
-
+    if (user.bearerToken == "") {
+      Timer(Duration(seconds: 3), () => Get.offAndToNamed(login));
+    } else {
+      Timer(Duration(seconds: 3),
+          () => Get.offAndToNamed(homescreen, arguments: user));
     }
-    else {
-      Timer(
-          Duration(seconds: 3), () => Get.offAndToNamed(homeScreen, arguments: user));
-    }
-
   }
 
   @override
@@ -66,13 +60,6 @@ class _MyAppState extends State<MyApp> {
       initialRoute: login,
       initialBinding: ScreenBindings(),
       debugShowCheckedModeBanner: false,
-
-      //
-      // home: EasySplashScreen(
-      //     durationInSeconds: 5,
-      //     loadingText: Text("Loading..."),
-      //     logo:Image.asset("images/logo.png",scale: 2.0,),
-      //     navigator: LogIn()),
     );
   }
 }

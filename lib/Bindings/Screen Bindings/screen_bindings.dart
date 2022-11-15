@@ -3,10 +3,9 @@ import 'package:miasuperadmin/Screens/Events/View/events.dart';
 import 'package:miasuperadmin/Screens/ViewNoticeBoard/View/view_notice_board.dart';
 
 import '../../Screens/Add Admin/View/add_admin.dart';
-import '../../Screens/Add Event/add_event.dart';
 import '../../Screens/Add Society/View/add_society.dart';
 import '../../Screens/Arrivals/arrivals.dart';
-import '../../Screens/Chat/chat.dart';
+import '../../Screens/Chat/View/chat.dart';
 import '../../Screens/Home Screen/home_screen.dart';
 import '../../Screens/Login/View/login.dart';
 import '../../Screens/Reports/reports.dart';
@@ -29,7 +28,6 @@ class ScreenBindings extends Bindings
     // TODO: implement dependencies
 
     Get.lazyPut(() =>AddAdmin() );
-    Get.lazyPut(() =>AddEvent() );
     Get.lazyPut(() =>AddSociety() );
     Get.lazyPut(() => Arrivals() );
     Get.lazyPut(() =>Chat() );

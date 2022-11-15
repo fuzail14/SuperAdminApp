@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../Constants/constants.dart';
 
 class MyPasswordTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
   final String? labelText;
+  final FontWeight? fontWeight;
+  final double? width;
+  final double? height;
   final Color? labelTextColor;
   final Color? hintTextColor;
   final Color onFocusedBorderColor;
@@ -16,7 +22,10 @@ class MyPasswordTextFormField extends StatefulWidget {
 
   const MyPasswordTextFormField(
       {super.key,
+      this.fontWeight,
       this.controller,
+      this.width,
+      this.height,
       this.hintText,
       this.labelText,
       this.labelTextColor,
@@ -37,48 +46,49 @@ class MyPasswordTextFormField extends StatefulWidget {
 class _MyPasswordTextFormFieldState extends State<MyPasswordTextFormField> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.6,
-          decoration: const BoxDecoration(),
-          child: TextFormField(
-            onTap: widget.onTap,
-            validator: widget.validator,
-            obscureText: widget.obscureText,
-            maxLines: 1,
-            controller: widget.controller,
-            decoration: InputDecoration(
-              suffix: GestureDetector(
-                  onTap: widget.togglePasswordView,
-                  child: Icon(
-                    widget.obscureText
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                  )),
-              labelStyle: TextStyle(
-                color: widget.labelTextColor,
-              ),
-              hintStyle: TextStyle(
-                color: widget.hintTextColor,
-              ),
-              hintText: widget.hintText,
-              labelText: widget.labelText,
-              fillColor: widget.fillcolor,
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide:
-                    BorderSide(color: widget.onFocusedBorderColor, width: 1),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.0),
-                borderSide: BorderSide(
-                  color: widget.onEnabledBorderColor,
-                  width: 1,
-                ),
-              ),
-            ),
+    return SizedBox(
+      width: widget.width,
+      height:widget.height ,
+      child: TextFormField(
+        onTap: widget.onTap,
+        validator: widget.validator,
+        obscureText: widget.obscureText,
+        maxLines: 1,
+        controller: widget.controller,
+        decoration: InputDecoration(
+          suffix: GestureDetector(
+              onTap: widget.togglePasswordView,
+              child: Icon(
+                widget.obscureText
+                    ? Icons.visibility
+                    : Icons.visibility_off,
+              )),
+
+    labelStyle:     GoogleFonts.montserrat(
+    color: secondaryColor,
+    fontWeight: FontWeight.w500
+    ),
+          hintStyle: TextStyle(
+            color: widget.hintTextColor,
           ),
-        ));
+          hintText: widget.hintText,
+          labelText: widget.labelText,
+          fillColor: widget.fillcolor,
+
+          // focusedBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   borderSide:
+          //       BorderSide(color: widget.onFocusedBorderColor, width: 1),
+          // ),
+          // enabledBorder: OutlineInputBorder(
+          //   borderRadius: BorderRadius.circular(10.0),
+          //   borderSide: BorderSide(
+          //     color: widget.onEnabledBorderColor,
+          //     width: 1,
+          //   ),
+          // ),
+        ),
+      ),
+    );
   }
 }

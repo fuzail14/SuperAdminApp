@@ -1,64 +1,52 @@
-
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:http/http.dart' as Http;
-
-
 import '../../../Bindings/Set Routes/set_routes.dart';
 import '../../../Constants/api_routes.dart';
 import '../../View Admin Details/Model/view_admin_details_model.dart';
-
 class UpdateAdminController extends GetxController {
+  var isHidden = true;
+
+  TextEditingController subAdminFirstNameController = TextEditingController();
+  TextEditingController subAdminLastNameController = TextEditingController();
+  TextEditingController subAdminCnicController = TextEditingController();
+  TextEditingController subAdminAddressController = TextEditingController();
+  TextEditingController subAdminMobileNoController = TextEditingController();
+  TextEditingController subAdminPasswordController = TextEditingController();
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
 
-    
     listOfSubAdmin = argument[0];
     token = argument[1];
-
     print('argument[0] ${listOfSubAdmin}');
     print('argument[1] ${token}');
 
+    print(listOfSubAdmin!.password);
     // updateAdminController.file = updateAdminController.listOfSubAdmin!.image;
 
-    userFirstNameController.text =
-        listOfSubAdmin!.firstname!;
-    userLastNameController.text =
-        listOfSubAdmin!.lastname!;
-    userCnicController.text =
-        listOfSubAdmin!.cnic!;
-    userMobileNoController.text =
-        listOfSubAdmin!.mobileno!;
-    userAddressController.text =
-        listOfSubAdmin!.address!;
-    userPasswordController.text =
-        listOfSubAdmin!.password!;
-        
+    subAdminFirstNameController.text = listOfSubAdmin!.firstname!;
+    subAdminLastNameController.text = listOfSubAdmin!.lastname!;
+    subAdminCnicController.text = listOfSubAdmin!.cnic!;
+    subAdminMobileNoController.text = listOfSubAdmin!.mobileno!;
+    subAdminAddressController.text = listOfSubAdmin!.address!;
+    subAdminPasswordController.text = listOfSubAdmin!.password!;
   }
-  TextEditingController userFirstNameController = TextEditingController();
-  TextEditingController userLastNameController = TextEditingController();
-  TextEditingController userMobileNoController = TextEditingController();
-  TextEditingController userCnicController = TextEditingController();
-  TextEditingController userAddressController = TextEditingController();
-  TextEditingController userPasswordController = TextEditingController();
+
   var argument = Get.arguments;
   final formKey = GlobalKey<FormState>();
-  
 
   SubAdmin? listOfSubAdmin;
 
   String? token;
 
-File? file;
+  File? file;
   var isFile = false;
-  
-
 
   getFile() async {
     // String? base64Image;
@@ -94,24 +82,23 @@ File? file;
     required String subadminaddress,
     required String subadminpassword,
     required String bearerToken,
-  File? file,
+    File? file,
   }) async {
     print("update api");
     print(subadminid.toString());
     print(subadminfirstname);
     print(subadminaddress);
     print(bearerToken.toString());
-    print( file);
+    print(file);
 
     Map<String, String> headers = {"Authorization": "Bearer $bearerToken"};
 
     var request = Http.MultipartRequest('POST', Uri.parse(Api.updatesubadmin));
     request.headers.addAll(headers);
 
-    if ( file!=null)
-      { request.files.add(await Http.MultipartFile.fromPath('image', file.path));
-
-      }
+    if (file != null) {
+      request.files.add(await Http.MultipartFile.fromPath('image', file.path));
+    }
 
     request.fields['firstname'] = subadminfirstname;
     request.fields['lastname'] = subadminlastname;
@@ -130,20 +117,41 @@ File? file;
       print('view admin py first aye update k liye ${argument[2]}');
 
       Get.offAndToNamed(viewAdminDetails, arguments: argument[2]);
-    }
-
-   else if (response.statusCode == 403) {
-
-
-
+    } else if (response.statusCode == 403) {
       Get.snackbar('Error', response.body.toString());
+    } else {
+      print("Server Error");
     }
+  }
 
+  void togglePasswordView() {
+    isHidden = !isHidden;
+    update();
+  }
 
+  Future fcmtokenrefresh(int id, String fcmtoken, String bearertoken) async {
+    print("Fcm token refresh Api   Hits ! ");
 
-    else {
-         print("Server Error");
+    try {
+      final response = await Http.post(
+        Uri.parse(Api.fcmtokenrefresh),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': "Bearer $bearertoken"
+        },
+        body: jsonEncode(<String, dynamic>{
+          'id': id,
+          'fcmtoken': fcmtoken,
+        }),
+      );
+      print("Fcm token refresh Api Hits Successfully !");
+      print(response.statusCode);
+      print(response.body);
+      var data = jsonDecode(response.body);
 
+      print(data);
+    } catch (SocketException) {
+      Get.snackbar('Error Message', 'No Internet Connection');
     }
   }
 }

@@ -9,9 +9,8 @@ import 'package:miasuperadmin/Screens/Add%20Society/View/add_society.dart';
 import 'package:miasuperadmin/Screens/Events/View/events.dart';
 import 'package:miasuperadmin/Screens/ViewNoticeBoard/View/view_notice_board.dart';
 
-import '../../Screens/Add Event/add_event.dart';
 import '../../Screens/Arrivals/arrivals.dart';
-import '../../Screens/Chat/chat.dart';
+import '../../Screens/Chat/View/chat.dart';
 
 import '../../Screens/Home Screen/home_screen.dart';
 import '../../Screens/Login/View/login.dart';
@@ -32,12 +31,11 @@ class Pages {
   List<GetPage> getPages() {
     return [
       GetPage(name: addAdmin, page: () => AddAdmin()),
-      GetPage(name: addEvent, page: () => AddEvent()),
       GetPage(name: addSociety, page: () => AddSociety()),
       GetPage(name: arrivals, page: () => Arrivals()),
       GetPage(name: chat, page: () => Chat()),
       GetPage(name: viewevents, page: () => ViewEvents()),
-      GetPage(name: homeScreen, page: () => HomeScreen()),
+      GetPage(name: homescreen, page: () => HomeScreen()),
       GetPage(name: login, page: () => LogIn()),
       GetPage(name: reports, page: () => Reports()),
       GetPage(name: signUp, page: () => SignUp()),

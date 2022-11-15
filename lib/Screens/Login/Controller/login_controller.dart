@@ -8,6 +8,7 @@ import '../../../Services/Shared Preferences/MySharedPreferences.dart';
 import '../Model/User.dart';
 
 class LoginController extends GetxController {
+  var isHidden = true;
   TextEditingController userCnicController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
   @override
@@ -28,11 +29,11 @@ class LoginController extends GetxController {
         'password': password,
       }),
     );
+    var data = jsonDecode(response.body);
+    if (response.statusCode == 200 && data['data']['roleid']==1) {
 
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
       print(data);
-      print(data['data']['firstname']);
+
 
       final User user = User(
           id: data['data']['id'],
@@ -44,18 +45,25 @@ class LoginController extends GetxController {
           image: data['data']['image'],
           address: data['data']['address'],
           mobileno: data['data']['mobileno'],
+          password:data['data']['password'] ,
           bearerToken: data['Bearer']);
 
+
       MySharedPreferences.setUserData(user: user);
+
       print("-------");
       print(user.id);
       print(response.statusCode);
 
-      Get.toNamed(homeScreen, arguments: user);
+      Get.offAllNamed(homescreen, arguments: user);
       Get.snackbar(
           "Login Successfully", "Welcome back 😉 " + user.firstName.toString());
     } else {
       Get.snackbar("Login Failed", "UnAuthorized 😥");
     }
+  }
+  void togglePasswordView() {
+    isHidden = !isHidden;
+    update();
   }
 }

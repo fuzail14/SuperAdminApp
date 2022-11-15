@@ -21,6 +21,7 @@ class AddAdminController extends GetxController {
 
   var file;
   var isFile = false;
+  var isHidden = false;
 
   var argument = Get.arguments;
   User? user;
@@ -61,14 +62,15 @@ class AddAdminController extends GetxController {
   TextEditingController subAdminPasswordController = TextEditingController();
 
   addAdminApi(firstName, lastName, cnic, address, mobileno, password,
-      int? userid, int societyid, String token, File file) async {
+      int? userid, int societyid, String token, File? file) async {
     Map<String, String> headers = {"Authorization": "Bearer $token"};
 
     var request =
         Http.MultipartRequest('POST', Uri.parse(Api.registersubadmin));
     request.headers.addAll(headers);
-
-    request.files.add(await Http.MultipartFile.fromPath('image', file.path));
+    if (file!=null){
+      request.files.add(await Http.MultipartFile.fromPath('image', file.path));
+    }
     request.fields['firstname'] = firstName;
     request.fields['lastname'] = lastName;
     request.fields['cnic'] = cnic;
@@ -128,5 +130,9 @@ class AddAdminController extends GetxController {
     //   if (response.statusCode == 200) {
 
     //   }
+  }
+  void togglePasswordView() {
+    isHidden = !isHidden;
+    update();
   }
 }

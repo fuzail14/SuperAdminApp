@@ -242,7 +242,7 @@ class _ArrivalsState extends State<Arrivals> {
 
           },
 
-            horizontalPadding: 0,verticalPadding: 0,name: "Check IN / Check OUT", color: primaryColor, maxLines: 1,)),
+            name: "Check IN / Check OUT", color: primaryColor, maxLines: 1,)),
 
 
 

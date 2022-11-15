@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 class SignupController extends GetxController {
   var file;
   var isFile = false;
-  var isHidden = false;
+  var isHidden = true;
 
   getFile() async {
     // String? base64Image;
@@ -55,7 +55,7 @@ class SignupController extends GetxController {
       required String address,
       required String mobileno,
       required String password,
-      required File file}) async {
+      required File? file}) async {
     print('signup Api  Function Call');
     print("----Data----");
     print(firstName);
@@ -68,25 +68,29 @@ class SignupController extends GetxController {
     print("---------------------------");
 
     var request = Http.MultipartRequest('POST', Uri.parse(Api.signup));
+    if (file!=null){
     request.files.add(await Http.MultipartFile.fromPath('image', file.path));
+    }
     request.fields['firstname'] = firstName;
     request.fields['lastname'] = lastName;
     request.fields['cnic'] = cnic;
     request.fields['address'] = address;
     request.fields['mobileno'] = mobileno;
-    request.fields['roleid'] = 0.toString();
+    request.fields['roleid'] = 1.toString();
     request.fields['rolename'] = 'superadmin';
     request.fields['password'] = password;
     var responsed = await request.send();
     var response = await Http.Response.fromStream(responsed);
     print(response.statusCode);
+
+
     print(response.body);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body.toString());
       print(data);
       print(response.body);
       Get.snackbar("User Register Successfully", "");
-      Get.toNamed(login);
+      Get.offAllNamed(login);
     } else if (response.statusCode == 403) {
       var data = jsonDecode(response.body.toString());
 
