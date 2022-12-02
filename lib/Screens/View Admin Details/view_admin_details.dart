@@ -450,6 +450,7 @@ class ViewAdminDetails extends GetView {
                                                                               },
                                                                             );
                                                                           });
+                                                                  
                                                                     },
                                                                     child: SvgPicture
                                                                         .asset(
