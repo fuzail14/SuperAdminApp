@@ -62,7 +62,7 @@ class HomeScreen extends GetView {
                         onTap: () {
                           Get.toNamed(addSociety, arguments: controller.user);
                         },
-                        text: 'Add Society',
+                        text: 'Add Society/Building',
                         imgpath: 'images/home1.png',
                       ),
                       MyCard(
@@ -72,7 +72,7 @@ class HomeScreen extends GetView {
                         onTap: () {
                           Get.toNamed(viewSociety, arguments: controller.user);
                         },
-                        text: 'View Society',
+                        text: 'View Society/Building',
                         imgpath: 'images/home2.png',
                       ),
                     ],

@@ -7,31 +7,34 @@ import '../../../Constants/api_routes.dart';
 import '../../Login/Model/User.dart';
 
 class SocietyController extends GetxController {
-  var userdata= Get.arguments;
+  var userdata = Get.arguments;
   late final User user;
   final TextEditingController societyNameController = TextEditingController();
-  final TextEditingController societyAddressController = TextEditingController();
+  final TextEditingController societyAddressController =
+      TextEditingController();
+  String country = '';
+  String state = '';
+  String city = '';
+  String typeval = 'society';
+  List<String> type = ['society', 'building'];
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    this.user=userdata;
+    this.user = userdata;
   }
 
-
-  Future addSocietyApi(
-      {required int id,
-      required String token,
-      required String societyName,
-      required String societyAddress,
-    }) async {
-    print(societyName);
-    print(id);
-    print(token);
-    print(societyAddress);
-
-
+  Future addSocietyApi({
+    required int id,
+    required String token,
+    required String country,
+    required String state,
+    required String city,
+    required String type,
+    required String societyName,
+    required String societyAddress,
+  }) async {
     final response = await Http.post(
       Uri.parse(Api.add_society),
       headers: <String, String>{
@@ -39,11 +42,16 @@ class SocietyController extends GetxController {
         'Authorization': "Bearer $token"
       },
       body: jsonEncode(<String, dynamic>{
-        "societyname": societyName,
-        "societyaddress": societyAddress,
+        "country": country,
+        "state": state,
+        "city": city,
+        "type": type,
+        "name": societyName,
+        "address": societyAddress,
         "superadminid": id
       }),
     );
+    print(response.body);
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
@@ -54,9 +62,14 @@ class SocietyController extends GetxController {
       societyNameController.text = "";
       societyAddressController.text = "";
 
-      Get.snackbar("Society Add Successfully", "");
+      Get.snackbar("Add Successfully", "");
     } else {
-      Get.snackbar("Failed to Add Society", "");
+      Get.snackbar("Failed to Add", "");
     }
+  }
+
+  Selecttype(val) {
+    typeval = val;
+    update();
   }
 }

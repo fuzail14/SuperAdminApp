@@ -23,11 +23,11 @@ class UpdateSocietyController extends GetxController {
 society =data[0];
 user=data[1];
 
-societyNameController.text=society.societyname!;
-societyAddressController.text=society.societyaddress!;
-print(society.societyid);
-print(society.societyname);
-print(society.societyaddress);
+societyNameController.text=society.name!;
+societyAddressController.text=society.address!;
+print(society.id);
+print(society.name);
+print(society.address);
 
 
 

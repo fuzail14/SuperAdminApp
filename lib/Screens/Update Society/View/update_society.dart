@@ -105,7 +105,7 @@ class _UpdateSocietyState extends State<UpdateSociety> {
 
                             if (_formKey.currentState!.validate()) {
                               updateSocietyController.updateSocietyApi(
-                                societyid: controller.society.societyid!,
+                                societyid: controller.society.id!,
                                 token: controller.user.bearerToken!,
                                 societyname: controller.societyNameController.text,
                                 societyaddress :controller.societyAddressController.text ,

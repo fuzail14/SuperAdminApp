@@ -40,6 +40,7 @@ class MyCard extends GetView {
                     text!,
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.montserrat(
+                      fontSize: 12,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal),
                   ),

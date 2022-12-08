@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -78,12 +79,79 @@ class ViewSociety extends GetView {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 104, top: 65),
-                            child: Text(
-                              'View Societies',
-                              style: GoogleFonts.montserrat(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 32),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'View Societies',
+                                  style: GoogleFonts.montserrat(
+                                      color: primaryColor,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 32),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.450,
+                                ),
+                                DropdownButton<String>(
+                                  value: controller.filterval,
+                                  icon: Icon(Icons.arrow_downward,color: primaryColor,),
+                                  iconSize: 24,
+                                  elevation: 16,
+                                  style: TextStyle(color: Colors.deepPurple),
+                                  underline: Container(
+                                    height: 2,
+                                    color: primaryColor,
+                                  ),
+                                  onChanged: (value) {
+                                    controller.SelectFilterType(
+                                        value, controller.user.bearerToken,controller.user.id,);
+                                  },
+                                  items: controller.filter
+                                      .map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Row(children: [
+                                        Icon(
+                                          Icons.filter_alt,
+                                          color: primaryColor,
+                                        ),
+                                        Text(value),
+                                      ]),
+                                    );
+                                  }).toList(),
+                                ),
+                                // SizedBox(
+                                //   width:
+                                //       MediaQuery.of(context).size.width * 0.15,
+                                //   child: DropdownButton<String>(
+                                //     value: controller.filterval,
+                                //     style: TextStyle(color: Colors.black),
+                                //     items: controller.filter
+                                //         .map<DropdownMenuItem<String>>(
+                                //             (String value) {
+                                //       return DropdownMenuItem<String>(
+                                //         value: value,
+                                //         child: Text(value),
+                                //       );
+                                //     }).toList(),
+                                //     hint: Text(
+                                //       "Please choose a type",
+                                //       style: TextStyle(
+                                //           color: Colors.black,
+                                //           fontSize: 16,
+                                //           fontWeight: FontWeight.w600),
+                                //     ),
+                                //     onChanged: (value) {
+                                //       controller.SelectFilterType(
+                                //         value,
+                                //         controller.user.bearerToken,
+
+                                //       );
+                                //     },
+                                //   ),
+                                // ),
+                              ],
                             ),
                           ),
                           SizedBox(
@@ -102,28 +170,22 @@ class ViewSociety extends GetView {
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
                                         onTap: () {
-                                          print(
-                                              'address ${snapshot.data[index].societyaddress}');
                                           Get.toNamed(viewAdminDetails,
                                               arguments: [
                                                 controller.user,
-                                                snapshot.data[index].societyid,
-                                                snapshot
-                                                    .data[index].societyname,
+                                                snapshot.data[index].id,
+                                                snapshot.data[index].name,
                                               ]);
                                         },
                                         child: Container(
-                                          margin:
-                                               EdgeInsets.only(bottom: 30),
-                                          padding:
-                                               EdgeInsets.only(bottom: 30),
+                                          margin: EdgeInsets.only(bottom: 30),
+                                          padding: EdgeInsets.only(bottom: 30),
                                           decoration: BoxDecoration(
                                             border: Border(
                                               bottom: BorderSide(
                                                 //                    <--- top side
                                                 color: HexColor('#9C9C9C'),
-                                                
-                                                
+
                                                 style: BorderStyle.solid,
                                                 width: 0.5,
                                               ),
@@ -134,13 +196,13 @@ class ViewSociety extends GetView {
                                           child: ListTile(
                                               leading: Container(
                                                 width: MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.038,
+                                                        .size
+                                                        .width *
+                                                    0.038,
                                                 height: MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.058,
+                                                        .size
+                                                        .height *
+                                                    0.058,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -160,13 +222,12 @@ class ViewSociety extends GetView {
                                                         fit: BoxFit.fill)),
                                               ),
                                               title: Text(
-                                                snapshot
-                                                    .data[index].societyname,
+                                                snapshot.data[index].name
+                                                    .toString(),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                               subtitle: Text(
-                                                snapshot
-                                                    .data[index].societyaddress
+                                                snapshot.data[index].address
                                                     .toString(),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
@@ -197,11 +258,11 @@ class ViewSociety extends GetView {
                                                                 .size
                                                                 .width *
                                                             0.091,
-                                                            height:MediaQuery.of(context)
+                                                    height:
+                                                        MediaQuery.of(context)
                                                                 .size
                                                                 .height *
-                                                            0.036 ,
-
+                                                            0.036,
                                                     name: "Update",
                                                     color: HexColor('#2BE09F'),
                                                     maxLines: 1,
