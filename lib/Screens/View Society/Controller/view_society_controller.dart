@@ -21,6 +21,7 @@ class ViewSocietyController extends GetxController {
   Timer? debouncer;
   String filterval = 'society';
   var societyli = <Society>[].obs;
+  
   List<String> filter = ['society', 'building'];
   void debounce(
     VoidCallback callback, {
@@ -87,6 +88,7 @@ class ViewSocietyController extends GetxController {
 // return societyli;
     }
   }
+
 
   Future searchSocietyApi(String? query, String token) async {
     

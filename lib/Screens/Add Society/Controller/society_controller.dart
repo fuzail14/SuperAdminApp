@@ -12,6 +12,8 @@ class SocietyController extends GetxController {
   final TextEditingController societyNameController = TextEditingController();
   final TextEditingController societyAddressController =
       TextEditingController();
+  final TextEditingController societyAreaController = TextEditingController();
+
   String country = '';
   String state = '';
   String city = '';
@@ -31,6 +33,7 @@ class SocietyController extends GetxController {
     required String country,
     required String state,
     required String city,
+    required String area,
     required String type,
     required String societyName,
     required String societyAddress,
@@ -45,6 +48,8 @@ class SocietyController extends GetxController {
         "country": country,
         "state": state,
         "city": city,
+        "area": area,
+        
         "type": type,
         "name": societyName,
         "address": societyAddress,

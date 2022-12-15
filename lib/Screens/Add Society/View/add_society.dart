@@ -121,6 +121,23 @@ class AddSociety extends StatelessWidget {
                       ),
                     ),
                    
+                   Padding(
+                      padding: EdgeInsets.fromLTRB(
+                          0, MediaQuery.of(context).size.width * 0.02, 0, 0),
+                      child: MyTextFormField(
+                          fontWeight: FontWeight.w600,
+                          labelTextColor: secondaryColor,
+                          hintTextColor: secondaryColor,
+                          width: MediaQuery.of(context).size.width * 0.29,
+                          validator: emptyStringValidator,
+                          controller: _societyController.societyAreaController,
+                          hintText: "Enter Area",
+                          obscureText: false,
+                          labelText: "Area",
+                          onFocusedBorderColor: primaryColor,
+                          onEnabledBorderColor: primaryColor),
+                    ),
+                    
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           0, MediaQuery.of(context).size.width * 0.02, 0, 0),
@@ -137,6 +154,7 @@ class AddSociety extends StatelessWidget {
                           onFocusedBorderColor: primaryColor,
                           onEnabledBorderColor: primaryColor),
                     ),
+
                     Padding(
                       padding: EdgeInsets.fromLTRB(
                           0, MediaQuery.of(context).size.width * 0.02, 0, 0),
@@ -180,6 +198,7 @@ class AddSociety extends StatelessWidget {
                               country: controller.country,
                               state: controller.state,
                               city: controller.city,
+                              area:controller.societyAreaController.text,
                               type: controller.typeval,
                               
                               societyName:
