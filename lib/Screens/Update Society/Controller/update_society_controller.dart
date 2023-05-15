@@ -25,9 +25,6 @@ user=data[1];
 
 societyNameController.text=society.name!;
 societyAddressController.text=society.address!;
-print(society.id);
-print(society.name);
-print(society.address);
 
 
 

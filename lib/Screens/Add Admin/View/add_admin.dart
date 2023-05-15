@@ -47,57 +47,95 @@ class AddAdmin extends GetView {
 
                       children: [
 
-                        GestureDetector(
-                            onTap: () async {
-                              controller.file = await controller.getFile();
-                              print(controller.isFile);
-                              print(controller.file);
-                            },
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width*0.19,
-                                  height: MediaQuery.of(context).size.height*0.19,
-                                  decoration: controller.isFile
-                                      ? BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: FileImage(
-                                            File(
-                                              controller.file.path,
-                                            ),
-                                            scale: 1.0)),
-                                  ) : BoxDecoration(
-
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        scale: 1.0,
-                                          fit: BoxFit.cover,
-                                          image:
-                                          AssetImage("images/user.png"
-
-                                          ))),
+                        Stack(
+                          children: <Widget>[
+                            FittedBox(
+                              fit: BoxFit.contain,
+                              alignment: Alignment.center,
+                              child: CircleAvatar(
+                                radius: 80.0,
+                                backgroundColor: Colors.white,
+                                backgroundImage: controller.file == null
+                                    ? AssetImage("images/user.png")
+                                as ImageProvider
+                                    : FileImage(
+                                  File(controller.file!.path),
                                 ),
-                                Positioned(
-                                  left: MediaQuery.of(context).size.width*0.10,
-                                  top: MediaQuery.of(context).size.height*0.13,
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width*0.06,
-                                    height: MediaQuery.of(context).size.height*0.06,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: primaryColor),
-                                        color: primaryColor,
-                                        shape: BoxShape.circle),
-                                    child: Icon(
-                                      Icons.image,
-                                      size: 20,
-                                      color: Colors.white,
-                                    ),
+                              ),
+                            ),
+                            Positioned(
+                              left: 115,
+                              top: 110,
+                              child: InkWell(
+                                onTap: ()  async{
+                                  controller.file = await controller.getFile();
+                                  print(controller.isFile);
+                                  print(controller.file);
+                                },
+                                child: Container(width: 40,height: 40,
+                                  decoration: BoxDecoration(shape: BoxShape.circle,color: primaryColor),
+                                  child: Icon(
+                                    Icons.image,
+                                    color: Colors.white,
+                                    size: 28,
                                   ),
-                                )
-                              ],
-                            )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // GestureDetector(
+                        //     onTap: () async {
+                        //       controller.file = await controller.getFile();
+                        //       print(controller.isFile);
+                        //       print(controller.file);
+                        //     },
+                        //     child: Stack(
+                        //       children: [
+                        //         Container(
+                        //           width: MediaQuery.of(context).size.width*0.19,
+                        //           height: MediaQuery.of(context).size.height*0.19,
+                        //           decoration: controller.isFile
+                        //               ? BoxDecoration(
+                        //             shape: BoxShape.circle,
+                        //             image: DecorationImage(
+                        //                 fit: BoxFit.cover,
+                        //                 image: FileImage(
+                        //                     File(
+                        //                       controller.file.path,
+                        //                     ),
+                        //                     scale: 1.0)),
+                        //           ) : BoxDecoration(
+                        //
+                        //               shape: BoxShape.circle,
+                        //               image: DecorationImage(
+                        //                 scale: 1.0,
+                        //                   fit: BoxFit.cover,
+                        //                   image:
+                        //                   AssetImage("images/user.png"
+                        //
+                        //                   ))),
+                        //         ),
+                        //         Positioned(
+                        //           left: MediaQuery.of(context).size.width*0.10,
+                        //           top: MediaQuery.of(context).size.height*0.13,
+                        //           child: Container(
+                        //             width: MediaQuery.of(context).size.width*0.06,
+                        //             height: MediaQuery.of(context).size.height*0.06,
+                        //             decoration: BoxDecoration(
+                        //                 border: Border.all(color: primaryColor),
+                        //                 color: primaryColor,
+                        //                 shape: BoxShape.circle),
+                        //             child: Icon(
+                        //               Icons.image,
+                        //               size: 20,
+                        //               color: Colors.white,
+                        //             ),
+                        //           ),
+                        //         )
+                        //       ],
+                        //     )),
                         Padding(
                           padding:  EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.width*0.02 , 0, 0),
 

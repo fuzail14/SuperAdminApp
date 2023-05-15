@@ -41,7 +41,9 @@ class ViewUsers extends GetView {
               future: controller.viewResidentsApi(
                   controller.subadminid, controller.bearerToken),
               builder: (context, AsyncSnapshot snapshot) {
+
                 if (snapshot.hasData) {
+    if (snapshot.data != null && snapshot.data!.length!= 0) {
                   return SingleChildScrollView(
                       child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -341,7 +343,7 @@ class ViewUsers extends GetView {
                                                                           Text(
                                                                             "Address",
                                                                             style:
-                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.bold),
+                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.w400),
                                                                           ),
                                                                         ),
                                                                         Padding(
@@ -380,7 +382,7 @@ class ViewUsers extends GetView {
                                                                           Text(
                                                                             "Mobile NO",
                                                                             style:
-                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.bold),
+                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.w400),
                                                                           ),
                                                                         ),
                                                                         Padding(
@@ -419,7 +421,7 @@ class ViewUsers extends GetView {
                                                                           Text(
                                                                             "Vechile nO",
                                                                             style:
-                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'),fontWeight: FontWeight.bold),
+                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.w400),
                                                                           ),
                                                                         ),
                                                                         Padding(
@@ -458,7 +460,7 @@ class ViewUsers extends GetView {
                                                                           Text(
                                                                             "Property Type",
                                                                             style:
-                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.bold),
+                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.w400),
                                                                           ),
                                                                         ),
                                                                         Padding(
@@ -497,7 +499,7 @@ class ViewUsers extends GetView {
                                                                           Text(
                                                                             "Residential Type",
                                                                             style:
-                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.bold),
+                                                                            GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.w400),
                                                                           ),
                                                                         ),
 
@@ -516,60 +518,39 @@ class ViewUsers extends GetView {
                                                                                 color: HexColor('#1A1A1A'),
                                                                                 fontWeight: FontWeight.w400),
                                                                           ),
-                                                                        ):Padding(
-                                                                          padding: const EdgeInsets.fromLTRB(
-                                                                              50,
-                                                                              440,
-                                                                              0,
-                                                                              0),
-                                                                          child: Column(
-                                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                                            children: [
-                                                                               Text(
-                                                                            residenttype,
+                                                                        ):
+                                                                        Column(children: [
+                                                                          Text(
+                                                                            snapshot.data[index].ownername,
                                                                             style: GoogleFonts.montserrat(
                                                                                 fontSize: 16,
                                                                                 color: HexColor('#1A1A1A'),
                                                                                 fontWeight: FontWeight.w400),
                                                                           ),
-                                                                           Text(
-                                                                            'Owner Detail',
-                                                                            style:  GoogleFonts.montserrat(color: HexColor('#4D4D4D'), fontWeight: FontWeight.bold),
+
+                                                                          Text(
+                                                                            snapshot.data[index].owneraddress,
+                                                                            style: GoogleFonts.montserrat(
+                                                                                fontSize: 16,
+                                                                                color: HexColor('#1A1A1A'),
+                                                                                fontWeight: FontWeight.w400),
                                                                           ),
-                                                                            Text(
-                                                                              
-                                                                              snapshot.data[index].ownername,
-                                                                              style: GoogleFonts.montserrat(
-                                                                                  fontSize: 16,
-                                                                                  color: HexColor('#1A1A1A'),
-                                                                                  fontWeight: FontWeight.w400),
-                                                                            ),
 
-                                                                            Text(
-                                                                              snapshot.data[index].owneraddress,
-                                                                              style: GoogleFonts.montserrat(
-                                                                                  fontSize: 16,
-                                                                                  color: HexColor('#1A1A1A'),
-                                                                                  fontWeight: FontWeight.w400),
-                                                                            ),
-
-                                                                            Text(
-                                                                              snapshot.data[index].ownermobileno,
-                                                                              style: GoogleFonts.montserrat(
-                                                                                  fontSize: 16,
-                                                                                  color: HexColor('#1A1A1A'),
-                                                                                  fontWeight: FontWeight.w400),
-                                                                            ),
+                                                                          Text(
+                                                                            snapshot.data[index].ownermobileno,
+                                                                            style: GoogleFonts.montserrat(
+                                                                                fontSize: 16,
+                                                                                color: HexColor('#1A1A1A'),
+                                                                                fontWeight: FontWeight.w400),
+                                                                          ),
 
 
-                                                                          ],),
-                                                                        )
+                                                                        ],)
                                                                       ],
                                                                     ),
                                                                   ),
                                                                 );
                                                               });
-                                                       
                                                         },
                                                         child: SvgPicture.asset(
                                                           'images/detail_icon.svg',
@@ -584,8 +565,19 @@ class ViewUsers extends GetView {
                         ),
                       ),
                     ],
-                  ));
-              
+                  ));}
+    else {
+    return
+      Center(
+        child: Text("No Residents",
+          style: GoogleFonts.montserrat(
+          color: HexColor('#262626'),
+
+          fontWeight: FontWeight.w500,fontSize: 30
+        ),
+    ),
+      );
+    }
                 } else if (snapshot.hasError) {
                   return Text('Error');
                 } else {

@@ -2,11 +2,8 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:miasuperadmin/Screens/View%20GateKeepers/Model/gate_keeper_model.dart';
-
 import '../../../Constants/api_routes.dart';
 import 'package:http/http.dart' as Http;
-
 import '../Model/Event.dart';
 
 class ViewEventsController extends GetxController {

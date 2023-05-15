@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
@@ -41,25 +42,36 @@ class _MyAppState extends State<MyApp> {
 
     getUserSharedPreferencesData();
   }
-
-  void getUserSharedPreferencesData() async {
-    User user = await MySharedPreferences.getUserData();
+  void getUserSharedPreferencesData() async
+  {
+    User user= await MySharedPreferences.getUserData();
     print(user.bearerToken);
-    if (user.bearerToken == "") {
-      Timer(Duration(seconds: 3), () => Get.offAndToNamed(login));
-    } else {
-      Timer(Duration(seconds: 3),
-          () => Get.offAndToNamed(homescreen, arguments: user));
+    if( user.bearerToken=="")
+    {
+      Timer(Duration(seconds: 3), ()=>  Get.offAndToNamed(login)    );
+
     }
+    else {
+      Timer(
+          Duration(seconds: 3), () => Get.offAndToNamed(homescreen, arguments: user));
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       getPages: Pages().getPages(),
-      initialRoute: login,
+      initialRoute: splash,
       initialBinding: ScreenBindings(),
       debugShowCheckedModeBanner: false,
+
+      //
+      // home: EasySplashScreen(
+      //     durationInSeconds: 5,
+      //     loadingText: Text("Loading..."),
+      //     logo:Image.asset("images/logo.png",scale: 2.0,),
+      //     navigator: LogIn()),
     );
   }
 }

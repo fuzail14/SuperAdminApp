@@ -34,6 +34,7 @@ class ViewNotioceBoard extends GetView {
                   controller.subadminid, controller.bearerToken),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
+    if (snapshot.data != null && snapshot.data!.length!= 0) {
                   return
                     SingleChildScrollView(
                         child: Column(
@@ -265,7 +266,20 @@ class ViewNotioceBoard extends GetView {
                               ),
                             ),
                           ],
-                        ));
+                        ));}
+    else{
+
+      return  Center(
+        child: Text("No Notices",
+          style: GoogleFonts.montserrat(
+              color: HexColor('#262626'),
+
+              fontWeight: FontWeight.w500,fontSize: 30
+          ),
+        ),
+      );
+
+    }
                 } else if (snapshot.hasError) {
                   return Text('Error');
                 } else {

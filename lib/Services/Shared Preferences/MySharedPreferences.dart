@@ -27,10 +27,11 @@ class MySharedPreferences {
       // value.remove(firstNameSPKey);
       // value.remove(lastNameSPKey);
       final success=    value.remove(bearerTokenSPKey);
+
       print(success.then((value) => value));
-      // value.remove(cnicSPKey);
-      // value.remove(roleNameSPKey);
-      // value.remove(roleIdSPKey);
+      value.remove(cnicSPKey);
+      value.remove(roleNameSPKey);
+      value.remove(roleIdSPKey);
 
     });
   }

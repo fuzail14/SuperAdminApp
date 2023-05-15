@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:miasuperadmin/Screens/Events/View/events.dart';
+import 'package:miasuperadmin/Screens/Splash/View/splash_screen.dart';
 import 'package:miasuperadmin/Screens/ViewNoticeBoard/View/view_notice_board.dart';
 
 import '../../Screens/Add Admin/View/add_admin.dart';
@@ -12,8 +13,8 @@ import '../../Screens/Reports/reports.dart';
 import '../../Screens/Sign Up/View/sign_up.dart';
 import '../../Screens/Update Admin/View/update_admin.dart';
 import '../../Screens/Update Society/View/update_society.dart';
+import '../../Screens/View Admin Details/ViewAdminDetailsTile2.dart';
 import '../../Screens/View Admin Details/view_admin_details.dart';
-import '../../Screens/View Admin Details/view_admin_details_tile2.dart';
 import '../../Screens/View GateKeepers/View/gate_kpeer_screen.dart';
 
 import '../../Screens/View Service Provider/view_service_provider.dart';
@@ -26,7 +27,7 @@ class ScreenBindings extends Bindings
   @override
   void dependencies() {
     // TODO: implement dependencies
-
+    Get.lazyPut(() =>SplashScreen() );
     Get.lazyPut(() =>AddAdmin() );
     Get.lazyPut(() =>AddSociety() );
     Get.lazyPut(() => Arrivals() );

@@ -50,7 +50,7 @@ class AddSociety extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.29,
                       child: CSCPicker(
-                        defaultCountry: DefaultCountry.Pakistan,
+                        defaultCountry: CscCountry.Pakistan,
                         showStates: true,
                         showCities: true,
                         flagState: CountryFlag.ENABLE,
@@ -172,7 +172,50 @@ class AddSociety extends StatelessWidget {
                           onFocusedBorderColor: primaryColor,
                           onEnabledBorderColor: primaryColor),
                     ),
-                    Padding(
+
+                SizedBox(width: 400,
+                  child: Column(
+
+                      children: <Widget>[
+                  ListTile(
+                    title: const Text('Scenario # 1: Street => House'),
+                    leading: Radio(
+                      value: SocietyStructure.scenario1,
+                      groupValue: controller.structure,
+                      onChanged: (SocietyStructure? value) {
+
+                        controller.selectedSocietyStructure(value);
+
+
+                      },
+                    ),
+                  ),
+                  ListTile(
+                    title: const Text('Scenario # 2: Block => Street =>House'),
+                    leading: Radio(
+                      value: SocietyStructure.scenario2,
+                      groupValue: controller.structure,
+                      onChanged: (SocietyStructure? value) {
+                        controller.selectedSocietyStructure(value);
+                      }),
+                  ),
+                  ListTile(
+                    title: const Text('Scenario # 3:Phase => Block => Street =>House'),
+                    leading: Radio(
+                      value: SocietyStructure.scenario3,
+                      groupValue:controller.structure ,
+                      onChanged: (SocietyStructure? value) {
+
+
+                       controller.selectedSocietyStructure(value);
+                      },
+                    ),
+                  ),
+
+                      ],
+                    ),
+                ),
+                Padding(
                       padding: EdgeInsets.fromLTRB(
                           0, MediaQuery.of(context).size.width * 0.02, 0, 0),
                       child: MyButton(
@@ -194,13 +237,16 @@ class AddSociety extends StatelessWidget {
                             );
                             print(controller.city);
 
+
+
                             _societyController.addSocietyApi(
                               country: controller.country,
                               state: controller.state,
                               city: controller.city,
                               area:controller.societyAreaController.text,
                               type: controller.typeval,
-                              
+                              structuretype: controller.structure.index,
+
                               societyName:
                                   _societyController.societyNameController.text,
                               societyAddress: _societyController

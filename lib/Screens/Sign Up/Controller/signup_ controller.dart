@@ -102,7 +102,6 @@ class SignupController extends GetxController {
       Get.snackbar("Failed to Register", "");
     }
   }
-  
 
   void togglePasswordView() {
     isHidden = !isHidden;

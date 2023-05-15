@@ -1,4 +1,5 @@
 const String addAdmin = "/AddAdmin";
+const String splash = "/Splash";
 const String addEvent = "/AddEvent";
 const String addSociety = "/AddSociety";
 const String arrivals = "/Arrivals";

@@ -5,10 +5,15 @@ import 'package:http/http.dart' as Http;
 import '../../../Bindings/Set Routes/set_routes.dart';
 import '../../../Constants/api_routes.dart';
 import '../../Login/Model/User.dart';
+enum SocietyStructure {scenario0, scenario1, scenario2, scenario3 }
+
+
 
 class SocietyController extends GetxController {
   var userdata = Get.arguments;
   late final User user;
+  SocietyStructure structure = SocietyStructure.scenario1;
+
   final TextEditingController societyNameController = TextEditingController();
   final TextEditingController societyAddressController =
       TextEditingController();
@@ -37,6 +42,7 @@ class SocietyController extends GetxController {
     required String type,
     required String societyName,
     required String societyAddress,
+    required int structuretype
   }) async {
     final response = await Http.post(
       Uri.parse(Api.add_society),
@@ -53,7 +59,8 @@ class SocietyController extends GetxController {
         "type": type,
         "name": societyName,
         "address": societyAddress,
-        "superadminid": id
+        "superadminid": id,
+        "structuretype":structuretype
       }),
     );
     print(response.body);
@@ -72,6 +79,12 @@ class SocietyController extends GetxController {
       Get.snackbar("Failed to Add", "");
     }
   }
+  selectedSocietyStructure(val)
+  {
+    structure = val;
+    update();
+  }
+
 
   Selecttype(val) {
     typeval = val;

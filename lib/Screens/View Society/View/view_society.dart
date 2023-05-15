@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import '../../../Bindings/Set Routes/set_routes.dart';
 import '../../../Constants/constants.dart';
 import '../../../Widgets/My Button/my_button.dart';
+import '../../../Widgets/My Dialog Box/my_dialog_box.dart';
 import '../Controller/view_society_controller.dart';
 
 class ViewSociety extends GetView {
@@ -28,7 +27,9 @@ class ViewSociety extends GetView {
           title: Text(
             'View Societies',
             style: GoogleFonts.montserrat(
-                color: primaryColor, fontWeight: FontWeight.w600, fontSize: 36),
+              color: primaryColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         body: GetBuilder<ViewSocietyController>(
@@ -72,87 +73,34 @@ class ViewSociety extends GetView {
                                     borderRadius: BorderRadius.circular(10)),
                                 focusedBorder: OutlineInputBorder(),
                                 hintText: 'Search Society',
-
+                                suffixIcon: IconButton(
+                                  icon: Icon(Icons.cancel),
+                                  onPressed: () {
+                                    controller.searchController.text = '';
+                                    controller.data =
+                                        controller.viewAllSocietiesApi(
+                                            controller.user.id!,
+                                            controller.user.bearerToken!);
+                                  },
+                                ),
                                 prefixIcon: Icon(Icons.search),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 104, top: 65),
-                            child: Row(
-                              children: [
-                                Text(
+                          Row(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 104, top: 65),
+                                child: Text(
                                   'View Societies',
                                   style: GoogleFonts.montserrat(
                                       color: primaryColor,
                                       fontWeight: FontWeight.w600,
                                       fontSize: 32),
                                 ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.450,
-                                ),
-                                DropdownButton<String>(
-                                  value: controller.filterval,
-                                  icon: Icon(Icons.arrow_downward,color: primaryColor,),
-                                  iconSize: 24,
-                                  elevation: 16,
-                                  style: TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: primaryColor,
-                                  ),
-                                  onChanged: (value) {
-                                    controller.SelectFilterType(
-                                        value, controller.user.bearerToken,controller.user.id,);
-                                  },
-                                  items: controller.filter
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Row(children: [
-                                        Icon(
-                                          Icons.filter_alt,
-                                          color: primaryColor,
-                                        ),
-                                        Text(value),
-                                      ]),
-                                    );
-                                  }).toList(),
-                                ),
-                                // SizedBox(
-                                //   width:
-                                //       MediaQuery.of(context).size.width * 0.15,
-                                //   child: DropdownButton<String>(
-                                //     value: controller.filterval,
-                                //     style: TextStyle(color: Colors.black),
-                                //     items: controller.filter
-                                //         .map<DropdownMenuItem<String>>(
-                                //             (String value) {
-                                //       return DropdownMenuItem<String>(
-                                //         value: value,
-                                //         child: Text(value),
-                                //       );
-                                //     }).toList(),
-                                //     hint: Text(
-                                //       "Please choose a type",
-                                //       style: TextStyle(
-                                //           color: Colors.black,
-                                //           fontSize: 16,
-                                //           fontWeight: FontWeight.w600),
-                                //     ),
-                                //     onChanged: (value) {
-                                //       controller.SelectFilterType(
-                                //         value,
-                                //         controller.user.bearerToken,
-
-                                //       );
-                                //     },
-                                //   ),
-                                // ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 20,
@@ -170,6 +118,8 @@ class ViewSociety extends GetView {
                                     itemBuilder: (context, index) {
                                       return GestureDetector(
                                         onTap: () {
+                                          print(
+                                              'address ${snapshot.data[index].address}');
                                           Get.toNamed(viewAdminDetails,
                                               arguments: [
                                                 controller.user,
@@ -222,8 +172,7 @@ class ViewSociety extends GetView {
                                                         fit: BoxFit.fill)),
                                               ),
                                               title: Text(
-                                                snapshot.data[index].name
-                                                    .toString(),
+                                                snapshot.data[index].name,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                               subtitle: Text(
@@ -233,25 +182,47 @@ class ViewSociety extends GetView {
                                               ),
                                               trailing:
                                                   Wrap(spacing: 20, children: [
-                                                // GestureDetector(
-                                                //     onTap: () {
-                                                //       controller.showDeleteDialog(
-                                                //           context,
-                                                //           societyid: snapshot
-                                                //               .data[
-                                                //                   index]
-                                                //               .societyid,
-                                                //           beartoken:
-                                                //               controller
-                                                //                   .user
-                                                //                   .bearerToken);
-                                                //     },
-                                                //     child: Icon(
-                                                //       Icons.delete,
-                                                //       color:
-                                                //           primaryColor,
-                                                //     )),
-
+                                                GestureDetector(
+                                                    onTap: () {
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return CustomDialog(
+                                                              image:
+                                                                  Image.asset(
+                                                                'images/warning.png',
+                                                                width: 40,
+                                                              ),
+                                                              negativeBtnPressed:
+                                                                  () {
+                                                                Get.back();
+                                                              },
+                                                              title:
+                                                                  "Are you sure !",
+                                                              content:
+                                                                  "Do you want to delete this?",
+                                                              positiveBtnText:
+                                                                  "delete",
+                                                              negativeBtnText:
+                                                                  "Cancel",
+                                                              positiveBtnPressed:
+                                                                  () {
+                                                                controller.deleteSocietyApi(
+                                                                    snapshot
+                                                                        .data[
+                                                                            index]
+                                                                        .id,
+                                                                    controller
+                                                                        .user
+                                                                        .bearerToken!);
+                                                              },
+                                                            );
+                                                          });
+                                                    },
+                                                    child: Icon(
+                                                      Icons.delete,
+                                                      color: primaryColor,
+                                                    )),
                                                 MyButton(
                                                     width:
                                                         MediaQuery.of(context)

@@ -30,10 +30,8 @@ class LoginController extends GetxController {
       }),
     );
     var data = jsonDecode(response.body);
-    if (response.statusCode == 200 && data['data']['roleid']==1) {
-
+    if (response.statusCode == 200 && data['data']['roleid'] == 1) {
       print(data);
-
 
       final User user = User(
           id: data['data']['id'],
@@ -45,9 +43,8 @@ class LoginController extends GetxController {
           image: data['data']['image'],
           address: data['data']['address'],
           mobileno: data['data']['mobileno'],
-          password:data['data']['password'] ,
+          password: data['data']['password'],
           bearerToken: data['Bearer']);
-
 
       MySharedPreferences.setUserData(user: user);
 
@@ -62,6 +59,7 @@ class LoginController extends GetxController {
       Get.snackbar("Login Failed", "UnAuthorized 😥");
     }
   }
+
   void togglePasswordView() {
     isHidden = !isHidden;
     update();

@@ -37,7 +37,9 @@ class ViewEvents extends GetView {
                   controller.subadminid, controller.bearerToken),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  return Column(
+    if (snapshot.data != null && snapshot.data!.length!= 0) {
+
+    return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -157,7 +159,21 @@ class ViewEvents extends GetView {
                         ),
                       ),
                     ],
-                  );
+                  );}
+    else{
+
+      return  Center(
+        child: Text("No Events",
+          style: GoogleFonts.montserrat(
+              color: HexColor('#262626'),
+
+              fontWeight: FontWeight.w500,fontSize: 30
+          ),
+        ),
+      );
+
+    }
+
                 } else if (snapshot.hasError) {
                   return Text('Error');
                 } else {

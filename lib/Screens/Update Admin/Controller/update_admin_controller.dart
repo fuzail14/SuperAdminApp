@@ -9,7 +9,6 @@ import '../../../Constants/api_routes.dart';
 import '../../View Admin Details/Model/view_admin_details_model.dart';
 class UpdateAdminController extends GetxController {
   var isHidden = true;
-
   TextEditingController subAdminFirstNameController = TextEditingController();
   TextEditingController subAdminLastNameController = TextEditingController();
   TextEditingController subAdminCnicController = TextEditingController();
@@ -35,11 +34,12 @@ class UpdateAdminController extends GetxController {
     subAdminCnicController.text = listOfSubAdmin!.cnic!;
     subAdminMobileNoController.text = listOfSubAdmin!.mobileno!;
     subAdminAddressController.text = listOfSubAdmin!.address!;
-    subAdminPasswordController.text = listOfSubAdmin!.password!;
+
   }
 
   var argument = Get.arguments;
   final formKey = GlobalKey<FormState>();
+  final passowrdformKey = GlobalKey<FormState>();
 
   SubAdmin? listOfSubAdmin;
 
@@ -80,7 +80,7 @@ class UpdateAdminController extends GetxController {
     required String subadminlastname,
     required String subadminmobileno,
     required String subadminaddress,
-    required String subadminpassword,
+
     required String bearerToken,
     File? file,
   }) async {
@@ -104,7 +104,6 @@ class UpdateAdminController extends GetxController {
     request.fields['lastname'] = subadminlastname;
     request.fields['address'] = subadminaddress;
     request.fields['mobileno'] = subadminmobileno;
-    request.fields['password'] = subadminpassword;
     request.fields['id'] = subadminid.toString();
     var responsed = await request.send();
     var response = await Http.Response.fromStream(responsed);
@@ -124,9 +123,58 @@ class UpdateAdminController extends GetxController {
     }
   }
 
+
+
+  Future resetPasswordApi({
+    required int subadminid,
+
+    required String bearerToken,
+    required String password,
+
+  }) async {
+    print("reset password api");
+    print(subadminid.toString());
+    print(bearerToken.toString());
+    print(file);
+
+    Map<String, String> headers = {"Authorization": "Bearer $bearerToken"};
+
+    var request = Http.MultipartRequest('POST', Uri.parse(Api.resetpassword));
+    request.headers.addAll(headers);
+
+
+    request.fields['password'] = password;
+    request.fields['id'] = subadminid.toString();
+    var responsed = await request.send();
+    var response = await Http.Response.fromStream(responsed);
+    print(response.statusCode);
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      subAdminPasswordController.clear();
+
+      print(response.body.toString());
+
+Get.back();
+
+update();
+
+    } else if (response.statusCode == 403) {
+      Get.snackbar('Error', response.body.toString());
+    } else {
+      print("Server Error");
+    }
+  }
+
+
   void togglePasswordView() {
     isHidden = !isHidden;
     update();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   Future fcmtokenrefresh(int id, String fcmtoken, String bearertoken) async {
